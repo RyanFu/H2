@@ -2,3 +2,5 @@ bin/*
 gen/*
 client/*/bin
 client/*/gen
+
+client/*/assets
