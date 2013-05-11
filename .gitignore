@@ -1,3 +1,4 @@
 bin/*
 gen/*
-
+client/*/bin
+client/*/gen
