@@ -1,0 +1,45 @@
+id
+level
+picid
+time
+ip
+score
+
+
+list.php?from=n&count=n&type=[0,1,2, bd, bw, bm]
+
+{
+  responseCode:[0,-1],
+  from:n,
+  count:n,
+  type:x,
+  data:[
+        [id:123,up:100,down:100,level:n], 
+        [id:124,up:100,down:100, level:n]
+       ]
+}       
+
+vote.php?level=n&id=n&type=[0,1]
+{
+  responseCode:[0,-1],
+  data:
+      {
+        id:n,
+        level:n, 
+        up:n, 
+        down:n
+      }
+}
+
+
+
+url
+
+http://106.186.18.229/servern/vote.php?level=0&id=5&type=0
+http://106.186.18.229/servern/vote.php?level=0&id=5&type=1
+
+http://106.186.18.229/servern/list.php?from=1&count=10&type=bd
+
+http://localhost/list.php?from=1&count=10&type=bd&nocache=TRUE
+
+http://localhost/vote.php?type=0&id=5&level=0&s=1&nocache=TRUE

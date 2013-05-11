@@ -1,0 +1,340 @@
+<project>
+	<!-- Your exisitng tasks if you have any
+	<target name="-pre-build">
+		<antcall target="set-version-using-commandline-args" />
+	</target>
+ 	-->
+	<target name="set-package">
+		<echo> package name: ${build.package}</echo>
+		<replaceregexp file="AndroidManifest.xml" match="package(.*)" replace='package="${build.package}"' />
+
+		<!-- change the package name in AndroidManifest -->
+		<replaceregexp flags="g" byline="false">
+			<regexp pattern="import (.*).R;" />
+			<substitution expression="import ${build.package}.R;" />
+			<fileset dir="./src" includes="**/*.java" />
+		</replaceregexp>
+		<!-- or
+		<replaceregexp encoding="utf-8" flags="g" match="import xxxx.R" replace="import xxxx.R">
+			<fileset dir="./src">
+				<include name="**/*.java" />
+			</fileset>
+		</replaceregexp> -->
+	</target>
+
+	<target name="set-application-name">
+		<echo> application name: ${build.app.name}</echo>
+		<!-- <replaceregexp file="res/**/strings.xml" match='(string name="app_name"&gt;)(.*)(&lt;/string)' replace='\1${build.app.name}\3' /> -->
+
+		<replaceregexp encoding="utf-8" flags="g" match='(string name="app_name"&gt;)(.*)(&lt;/string)' replace="\1${build.app.name}\3">
+			<fileset dir="./res">
+				<include name="values/strings.xml" />
+				<include name="values-zh-rCN/strings.xml" />
+				<include name="values-zh-rTW/strings.xml" />
+			</fileset>
+		</replaceregexp>
+	</target>
+
+	<target name="set-version-code">
+		<echo> application name: ${build.version.code}</echo>
+		<replaceregexp file="AndroidManifest.xml" match="android:versionCode(.*)" replace='android:versionCode="${build.version.code}"' />
+	</target>
+
+	<target name="set-version-name">
+		<echo> application name: ${build.version.name}</echo>
+		<replaceregexp file="AndroidManifest.xml" match="android:versionName(.*)" replace='android:versionName="${build.version.name}"' />
+	</target>
+
+	<target name="set-application-icon">
+		<echo> application icon: ${build.res.path}/${package.name}/icon.png</echo>
+		<copy todir="./res/drawable-hdpi" verbose="true" overwrite="true">
+			<fileset dir="${build.res.path}/${package.name}" includes="icon.*" />
+		</copy>
+	</target>
+
+	<target name="set-mode">
+		<echo> mode is offline: ${build.is.offline}</echo>
+		<replaceregexp file="AndroidManifest.xml" match='(meta-data\r*\n.* android:name="OFFLINE"\r*\n.* android:value=")(.*)(")' replace='\1${build.is.offline}\3' />
+	</target>
+
+	<target name="set-umeng">
+		<echo> umeng: ${build.umeng}</echo>
+		<replaceregexp file="AndroidManifest.xml" match='(meta-data\r*\n.* android:name="UMENG_APPKEY"\r*\n.* android:value=")(.*)(")' replace='\1${build.umeng}\3' />
+	</target>
+
+	<target name="set-umeng-channel">
+		<echo> umeng channel: ${build.umeng.channel}</echo>
+		<replaceregexp file="AndroidManifest.xml" match='(meta-data\r*\n.* android:name="UMENG_CHANNEL"\r*\n.* android:value=")(.*)(")' replace='\1${build.umeng.channel}\3' />
+	</target>
+
+	<target name="copy-images" if='${build.is.offline}' description="Builds the offline application in release mode.">
+		<echo> start copy file! </echo>
+		<mkdir dir="${build.res.dest.dir}" />
+		<copy todir="${build.res.dest.dir}" overwrite="true">
+			<fileset dir="${build.res.src.dir}" />
+		</copy>
+		<delete verbose="true">
+			<fileset dir="${build.res.dest.dir}" includes="icon.*" />
+		</delete>
+		<!-- move file 
+        <move todir="${build.res.dest.dir}">
+        	<fileset dir="${build.res.src.dir}"/>
+        </move>
+        -->
+	</target>
+
+	<target name="remove-images" if='${build.is.offline}' description="Builds the offline application in release mode.">
+		<echo> start copy file! </echo>
+		<delete dir="${build.res.dest.dir}" />
+	</target>
+
+	<target name="pfileExsits">
+		<condition property="dirIsExists">
+			<and>
+				<available file="assets/p1" type="dir" />
+				<available file="assets/p2" type="dir" />
+				<available file="assets/p3" type="dir" />
+			</and>
+		</condition>
+	</target>
+
+	<target name="move-out-assets-p-files" if="dirIsExists" depends="pfileExsits">
+		<echo>the dir is exist!</echo>
+		<move todir="${build.res.path}/temp/">
+			<fileset dir="assets/">
+				<include name="p*/*.*" />
+			</fileset>
+		</move>
+	</target>
+
+	<target name="move-in-assets-p-files" unless="dirIsExists" depends="pfileExsits">
+		<echo>the dir is not exist!</echo>
+		<move todir="assets/">
+			<fileset dir="${build.res.path}/temp/">
+				<include name="p*/*.*" />
+			</fileset>
+		</move>
+		<delete dir="${build.res.path}/temp" />
+	</target>
+
+	<target name="reset">
+		<exec executable="sh">
+			<arg line="-c 'svn revert -R src'" />
+		</exec>
+		<exec executable="sh">
+			<arg line="-c 'svn revert -R res'" />
+		</exec>
+		<exec executable="sh">
+			<arg line="-c 'svn revert -R assets'" />
+		</exec>
+		<exec executable="sh">
+			<arg line="-c 'svn revert -R AndroidManifest.xml'" />
+		</exec>
+		<echo> start delete file! ${build.res.dest.dir}</echo>
+		<delete dir="${build.res.dest.dir}" />
+		<antcall target="clean" />
+	</target>
+
+	<target name="ronline" description="Builds the online application in release mode.">
+		<antcall target="reset" />
+		<property name="build.is.offline" value="false" />
+		<antcall target="set-package" />
+		<antcall target="set-application-name" />
+		<antcall target="set-application-icon" />
+		<antcall target="set-version-code" />
+		<antcall target="set-version-name" />
+		<antcall target="set-umeng" />
+		<antcall target="set-mode" />
+		<antcall target="set-umeng-channel" />
+		<!-- <antcall target="copy-images" /> -->
+		<antcall target="release" />
+	</target>
+
+	<target name="roffline" description="Builds the offline application in release mode.">
+		<antcall target="reset" />
+		<property name="build.is.offline" value="true" />
+		<antcall target="move-out-assets-p-files" />
+		<antcall target="set-package" />
+		<antcall target="set-application-name" />
+		<antcall target="set-application-icon" />
+		<antcall target="set-version-code" />
+		<antcall target="set-version-name" />
+		<antcall target="set-mode" />
+		<antcall target="set-umeng" />
+		<antcall target="set-umeng-channel" />
+		<antcall target="copy-images" />
+		<antcall target="release" />
+		<antcall target="remove-images" />
+		<antcall target="move-in-assets-p-files" />
+	</target>
+
+	<property name="build.res.path" location="../../res/" />
+
+	<target name="package.offline">
+		<property name="release.apk.path" location="${release.dir}/${package.name}_${umeng.channel}.apk" />
+		<property name="build.package" value="${package.name}" />
+		<property name="build.app.name" value="${app.name}" />
+		<property name="build.res.src.dir" value="${build.res.path}/${package.name}" />
+		<property name="build.umeng" value="${umeng.key}" />
+		<property name="build.umeng.channel" value="${umeng.channel}" />
+		<echo> package name: ${build.package}</echo>
+		<echo> app name: ${build.app.name}</echo>
+		<echo> res image path: ${build.res.src.dir}</echo>
+		<echo> apk path: ${release.apk.path}</echo>
+		<echo> umeng: ${build.umeng}</echo>
+		<echo> umeng channel: ${build.umeng.channel}</echo>
+		<antcall target="roffline" />
+		<move file="bin/${ant.project.name}-release.apk" tofile="${release.apk.path}" />
+	</target>
+
+	<target name="package.online">
+		<property name="release.apk.path" location="${release.dir}/${package.name}_${umeng.channel}_online.apk" />
+		<property name="build.package" value="${package.name}" />
+		<property name="build.app.name" value="${app.name}" />
+		<property name="build.res.src.dir" value="${build.res.path}/${package.name}" />
+		<property name="build.umeng" value="${umeng.key}" />
+		<property name="build.umeng.channel" value="${umeng.channel}" />
+		<echo> package name: ${build.package}</echo>
+		<echo> app name: ${build.app.name}</echo>
+		<echo> res image path: ${build.res.src.dir}</echo>
+		<echo> apk path: ${release.apk.path}</echo>
+		<echo> umeng: ${build.umeng}</echo>
+		<echo> umeng channel: ${build.umeng.channel}</echo>
+		<antcall target="ronline" />
+		<move file="bin/${ant.project.name}-release.apk" tofile="${release.apk.path}" />
+	</target>
+
+	<macrodef name="build.package.offline">
+		<attribute name="package.name" />
+		<attribute name="app.name" />
+		<attribute name="version.code" />
+		<attribute name="version.name" />
+		<attribute name="umeng.key" />
+		<attribute name="umeng.channel" />
+		<sequential>
+			<ant antfile="build.xml" target="package.offline">
+				<property file="ant.properties" />
+				<property name="release.dir" location="../../releases/channel/@{umeng.channel}" />
+				<property name="package.name" value="@{package.name}" />
+				<property name="app.name" value="@{app.name}" />
+				<property name="build.version.code" value="@{version.code}" />
+				<property name="build.version.name" value="@{version.name}" />
+				<property name="umeng.key" value="@{umeng.key}" />
+				<property name="umeng.channel" value="@{umeng.channel}" />
+			</ant>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="build.package.online">
+		<attribute name="package.name" />
+		<attribute name="app.name" />
+		<attribute name="version.code" />
+		<attribute name="version.name" />
+		<attribute name="umeng.key" />
+		<attribute name="umeng.channel" />
+		<sequential>
+			<ant antfile="build.xml" target="package.online">
+				<property file="ant.properties" />
+				<property name="release.dir" location="../../releases/channel/@{umeng.channel}" />
+				<property name="package.name" value="@{package.name}" />
+				<property name="app.name" value="@{app.name}" />
+				<property name="build.version.code" value="@{version.code}" />
+				<property name="build.version.name" value="@{version.name}" />
+				<property name="umeng.key" value="@{umeng.key}" />
+				<property name="umeng.channel" value="@{umeng.channel}" />
+			</ant>
+		</sequential>
+	</macrodef>
+
+	<!-- ******************************************************* -->
+	<!-- ************************* Help ************************ -->
+	<!-- ******************************************************* -->
+
+	<target name="help">
+		<echo>Android Current Ant Build. Available targets:</echo>
+		<echo>   help:      Displays this help.</echo>
+		<echo>   clean:     Removes output files created by other targets.</echo>
+		<echo>              The 'all' target can be used to clean dependencies</echo>
+		<echo>              (tested projects and libraries)at the same time</echo>
+		<echo>              using: 'ant all clean'</echo>
+		<echo>   debug:     Builds the application and signs it with a debug key.</echo>
+		<echo>              The 'nodeps' target can be used to only build the</echo>
+		<echo>              current project and ignore the libraries using:</echo>
+		<echo>              'ant nodeps debug'</echo>
+		<echo>   release:   Builds the application. The generated apk file must be</echo>
+		<echo>              signed before it is published.</echo>
+		<echo>              The 'nodeps' target can be used to only build the</echo>
+		<echo>              current project and ignore the libraries using:</echo>
+		<echo>              'ant nodeps release'</echo>
+		<echo>   roffline:  Builds the application. The generated apk file must be</echo>
+		<echo>              signed before it is published.</echo>
+		<echo>              it's to build a offline application.</echo>
+		<echo>   ronline:   Builds the application. The generated apk file must be</echo>
+		<echo>              signed before it is published.</echo>
+		<echo>              it's to build a online application.</echo>
+		<echo>   rall:  	Builds the application. The generated apk file must be</echo>
+		<echo>              signed before it is published.</echo>
+		<echo>              it's to build a all kinds of application.</echo>
+		<echo>   instrument:Builds an instrumented package and signs it with a</echo>
+		<echo>              debug key.</echo>
+		<echo>   test:      Runs the tests. Project must be a test project and</echo>
+		<echo>              must have been built. Typical usage would be:</echo>
+		<echo>                  ant [emma] debug installt test</echo>
+		<echo>   emma:      Transiently enables code coverage for subsequent</echo>
+		<echo>              targets.</echo>
+		<echo>   install:   Installs the newly build package. Must either be used</echo>
+		<echo>              in conjunction with a build target (debug/release/</echo>
+		<echo>              instrument) or with the proper suffix indicating</echo>
+		<echo>              which package to install (see below).</echo>
+		<echo>              If the application was previously installed, the</echo>
+		<echo>              application is reinstalled if the signature matches.</echo>
+		<echo>   installd:  Installs (only) the debug package.</echo>
+		<echo>   installr:  Installs (only) the release package.</echo>
+		<echo>   installi:  Installs (only) the instrumented package.</echo>
+		<echo>   installt:  Installs (only) the test and tested packages (unless</echo>
+		<echo>              nodeps is used as well.</echo>
+		<echo>   uninstall: Uninstalls the application from a running emulator or</echo>
+		<echo>              device. Also uninstall tested package if applicable</echo>
+		<echo>              unless 'nodeps' is used as well.</echo>
+		<echo>   reset:  	reset any changes in this workspace.</echo>
+	</target>
+
+    <target name="single">
+		<build.package.online app.name="热辣媚娘" package.name="com.prettygirl.app" version.code="25" version.name="2.5" umeng.key="5132fa2652701540c6000071" umeng.channel="gplay" />
+		<antcall target="reset" />
+    </target>
+    
+    <target name="rall">        
+		<build.package.offline app.name="制服诱惑" package.name="com.prettygirl.i0001" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />        
+        <build.package.offline app.name="美腿之Tracy" package.name="com.prettygirl.i0002" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="美腿之Tammy" package.name="com.prettygirl.i0003" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="美腿诱惑" package.name="com.prettygirl.i0004" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />        
+        <build.package.offline app.name="美空美女刘羽琦" package.name="com.prettygirl.i0005" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="背影的遐想" package.name="com.prettygirl.i0006" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="性感内衣秀" package.name="com.prettygirl.i0007" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="狂野诱惑" package.name="com.prettygirl.i0009" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="惊爆小清新" package.name="com.prettygirl.i0010" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="妖娆之美" package.name="com.prettygirl.i0013" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="性感车模" package.name="com.prettygirl.i0014" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="优美动人" package.name="com.prettygirl.i0015" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="清纯MM特写二" package.name="com.prettygirl.i0016" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="睡美人" package.name="com.prettygirl.i0017" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="优美神态" package.name="com.prettygirl.i0019" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="萌妹子之冯雨芝" package.name="com.prettygirl.i0020" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="清纯MM特写一" package.name="com.prettygirl.i0021" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="性感美女" package.name="com.prettygirl.i0022" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="张馨予合集" package.name="com.prettygirl.i0023" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <antcall target="reset" />
+    </target>
+    
+   <target name="rall1">
+        <build.package.offline app.name="高清日本美女HD" package.name="com.zn.chenxinyu0003" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="小清新张馨予" package.name="com.zn.cangjingkong0007" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="长腿美女" package.name="com.zn.zhangxinyu0004" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="可爱萝莉" package.name="com.zn.zhouweitong0005" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />    
+        <build.package.offline app.name="AngelaBaby特写" package.name="com.rose.a0007" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <build.package.offline app.name="长腿美女之Vanessa" package.name="com.zn.ganlulu0002" version.code="37" version.name="3.7" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+        <antcall target="reset" />
+    </target>
+        
+</project>

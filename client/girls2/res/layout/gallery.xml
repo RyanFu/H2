@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    style="@style/fillall" >
+
+    <com.prettygirl.app.components.MAdView
+        android:id="@+id/mad"
+        style="@style/fillx"
+        android:layout_alignParentBottom="true"
+        android:gravity="center" />
+
+    <com.prettygirl.app.components.GalleryView
+        android:id="@+id/gallery"
+        style="@style/fillall"
+        android:layout_above="@id/mad"
+        android:layout_alignWithParentIfMissing="true" />
+
+    <RelativeLayout
+        style="@style/fillx"
+        android:layout_alignParentTop="true"
+        android:background="@color/custom_click_mask_color" >
+
+        <TextView
+            android:id="@+id/point"
+            style="@style/wrap"
+            android:layout_alignParentLeft="true"
+            android:padding="10dip"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1.0"
+            android:shadowDy="1.0"
+            android:shadowRadius="2.0"
+            android:textColor="@color/custom_point_text_color"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/page"
+            style="@style/wrap"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/page_index_background"
+            android:drawablePadding="5dip"
+            android:drawableRight="@drawable/e_goto_page"
+            android:padding="10dip"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1.0"
+            android:shadowDy="1.0"
+            android:shadowRadius="2.0"
+            android:textColor="@color/custom_point_text_color"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/autoplay"
+        style="@style/wrap"
+        android:layout_above="@id/mad"
+        android:layout_alignParentRight="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_margin="10dip" />
+
+</RelativeLayout>

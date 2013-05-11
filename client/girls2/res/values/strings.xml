@@ -1,0 +1,59 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">Hot Sexy Asian Girls</string>
+    <string name="loading">Loading…</string>
+    <string name="network_error_or_updating">An error just happened, please make sure you are using the latest version. Or check your network connection and come back later.</string>
+    <string name="album_updated"><xliff:g id="count">%d</xliff:g> new album loaded</string>
+    <string name="msg_private_enabled">Hey, thank you for coming back, we have some exclusive pictures for you :-) You can press Menu key anytime to check it out.</string>
+    <string name="msg_review">Thank you for using our app. Please spend a few moment to tell us how you think about our app in Google Play.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="current_level">Current Score: %s</string>
+    <string name="current_go_level">Next Level Need %d Points</string>
+    <string name="current_unlocked_level">Level %d (Unlocked)</string>
+    <string name="current_level_1">Score: %s</string>
+    <string name="current_page">Page: %s</string>
+    <string name="dialog_review_title">Get 100 point now</string>
+    <string name="dialog_review_content">Rate 5 star and get 100 point now!</string>
+    <string name="dialog_rate_title">Leave a message</string>
+    <string name="dialog_rate_content">Tell us what types you like the most, what you want to see.</string>
+    <string name="dialog_more_title">Want more girls</string>
+    <string name="dialog_more_content">Check out thousands of girls online. You will never get bored.</string>
+    <string name="exit_dialog_more_girl_text">See more girls in HD mode!</string>
+    <string name="exit_dialog_support_text">Support us, rate the app. \nThank you :)</string>
+    <string name="exit_dialog_exit_text">Just quit</string>
+    <string name="e_gallery_detail_image_save_error_title">Save Failed</string>
+    <string name="e_gallery_detail_image_save_error_msg">SDCard is not available!</string>
+    <string name="e_gallery_detail_image_save_fail_msg">Failed to Save</string>
+    <string name="e_gallery_detail_image_save_success_msg">Saved Successfully：%s</string>
+    <string name="e_gallery_detail_image_save">Save</string>
+    <string name="e_gallery_detail_image_cancel">Cancel</string>
+    <string name="e_gallery_dialog_goto_index">Go To</string>
+    <string name="favorite_button_text">Favorites</string>
+    <string name="more_button_text">More Beauty</string>
+    <string name="favorite_button_text_null_msg">Oh, Favorite is empty! \(^_^)/~~~</string>
+    <string name="favorite_null_msg">Oh, There is no pic set as favorite! \(^_^)/~~~</string>
+    <string name="try_online">Oh, %d beauty are waiting for you online!</string>
+    <string name="try_online_download">Download</string>
+    <string name="share_title">Share</string>
+    <string name="set_as_wallpaper">Set as Wallpaper</string>
+    <string name="share_text">Online watch thousands of beauty, updated daily, never re-sample. Can unlock private album, exclusive cause a nosebleed on the Bay of beauty. Share Address: %s</string>
+
+    <string name="pic_widget_reset">Reset</string>
+    
+    <string name="navigation_rank_center">Ranking</string>
+    <string name="thumb_up_request_failed">Please check your network or see if there is the latest version！</string>
+    <string name="navigation_rank_center_view_failed">Get the list failed \n Please check your network or do not have the latest version, and then retry！</string>
+    <string name="navigation_rank_center_view_blank">Ranking is down for maintenance...</string>
+    <string name="navigation_rank_center_view_retry">Retry</string>
+    <string name="navigation_rank_center_view_setting">Setting</string>
+    
+    <string name="navigation_rank_center_latest">Latest List</string>
+    <string name="navigation_rank_center_weeky">Week Ranking</string>
+    <string name="navigation_rank_center_monthy">Monthly Ranking</string>
+    
+    <string name="navigation_rank_center_version_name">The current version：%s</string>
+    <string name="navigation_rank_center_verion_unknow">Unknown</string>
+    <string name="navigation_rank_center_support">Leave a Message</string>
+    <string name="navigation_rank_center_contact_us">Contact the Author</string>
+</resources>

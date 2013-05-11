@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AV宝典</string>
+    <string name="exit_dialog_more_girl_text">看看更多更有诱惑的应用？</string>
+    <string name="exit_dialog_support_text">求好评，支持一下。</string>
+    <string name="exit_dialog_exit_text">退出</string>
+    <string name="pic_widget_reset">重置</string>
+    <string name="e_gallery_detail_image_save_error_title">保存失败</string>
+    <string name="e_gallery_detail_image_save_error_msg">SDCard不可使用</string>
+    <string name="e_gallery_detail_image_save_fail_msg">保存失败</string>
+    <string name="e_gallery_detail_image_save_success_msg">保存成功：%s</string>
+    <string name="e_gallery_detail_image_save">保存</string>
+    <string name="ok">确定</string>
+    <string name="e_gallery_detail_image_cancel">取消</string>
+    <string name="share_title">分享</string>
+
+</resources>

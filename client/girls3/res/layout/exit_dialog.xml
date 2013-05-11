@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/fillall"
+    android:layout_width="300dip"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/e_exit_dialog_more_girl"
+        style="@style/exitWrapper"
+        android:layout_marginBottom="10dip" >
+
+        <ImageView
+            android:layout_width="96dip"
+            android:layout_height="96dip"
+            android:src="@drawable/pic1_2" />
+
+        <TextView
+            style="@style/exitText"
+            android:text="@string/exit_dialog_more_girl_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/e_exit_dialog_support"
+        style="@style/exitWrapper"
+        android:layout_marginBottom="10dip" >
+
+        <ImageView
+            android:layout_width="96dip"
+            android:layout_height="96dip"
+            android:src="@drawable/pic1_0" />
+
+        <TextView
+            style="@style/exitText"
+            android:text="@string/exit_dialog_support_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/e_exit_dialog_exit"
+        style="@style/exitWrapper" >
+
+        <ImageView
+            android:layout_width="96dip"
+            android:layout_height="96dip"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            style="@style/exitText"
+            android:text="@string/exit_dialog_exit_text" />
+    </LinearLayout>
+
+</LinearLayout>

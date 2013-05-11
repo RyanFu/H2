@@ -1,0 +1,20 @@
+使用ant编译方法：
+	1. 编译所有内容使用如下命令:
+		ant rall
+	2. 添加新的资源包，并创建新的离线包:
+		A)	打开custom_rules.xml，找到rall，并在其中添加一项即可:
+			<!-- 添加离线包模板 -->
+			<build.package.offline application.icon="com.prettygirl.i0001.png" package.name="com.prettygirl.i0001" version.code="15" version.name="1000" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+			<!-- 添加在线包模板 -->
+			<build.package.online application.icon="com.prettygirl.i0001.png" package.name="com.prettygirl.i0001" version.code="15" version.name="1000" umeng.key="501d0ca6527015283f000013" umeng.channel="gplay" />
+			*** 注释 ****
+			application.icon	表示包图标
+			package.name 		表示包名
+			version.code 		表示版本号
+			version.name 		表示版本名称
+			umeng.key			表示友盟统计使用的key
+			umeng.channel		表示友盟中的渠道名称
+		B) 按照上面的属性修改其对应的值
+		C) 在根目录下res添加图片资源，并且添加对应的应用icon(以包名为名称)
+		D) 编译即可
+	3. 所有编译出来的包均在顶层目录下的release目录下

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dip"
+    android:orientation="vertical"
+    android:paddingTop="10dip"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip"
+    android:background="@drawable/dialog_bg">
+
+    <LinearLayout android:id="@+id/topPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dip"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:paddingBottom="10dip">
+        
+        <LinearLayout android:id="@+id/title_template"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            
+            <ImageView android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dip"
+                android:src="@android:drawable/ic_dialog_info" />
+            
+            <TextView android:id="@+id/alertTitle"
+                android:textSize="18sp"
+                android:textColor="@color/dialog_text_title"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <!-- If the client uses a customTitle, it will be added here. -->
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/contentPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <ScrollView android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="ifContentScrolls">
+            <TextView android:id="@+id/message"
+                android:textColor="@color/dialog_text_dark"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:minHeight="100dp"
+                android:minWidth="@dimen/dialog_text_min_width"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:paddingTop="20dip"
+                android:paddingBottom="20dip" />
+        </ScrollView>
+    </LinearLayout>
+
+    <FrameLayout android:id="@+id/customPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <FrameLayout android:id="@+id/custom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip" />
+    </FrameLayout>
+
+    <LinearLayout android:id="@+id/buttonPanel"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/button_bar_height"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/button_bar_bg" >
+         
+        <Button android:id="@+id/button1"
+            android:layout_width="0dip" android:layout_height="fill_parent"
+            android:layout_weight="1.0" 
+            android:maxLines="2"
+            android:layout_marginLeft="0dip"
+            android:layout_marginRight="0dip"
+            style="@style/ButtonStyle" />
+        
+        <View android:id="@+id/view_divider1"
+            android:layout_width="1dp" android:layout_height="20dip"
+            android:background="@drawable/button_divider" />
+            
+        <Button android:id="@+id/button3"
+            android:layout_width="0dip" android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:maxLines="2"
+            android:layout_marginLeft="1dip"
+            android:layout_marginRight="1dip"
+            style="@style/ButtonStyle"/>
+        
+        <View android:id="@+id/view_divider2"
+            android:layout_width="1dp" android:layout_height="20dip"
+            android:background="@drawable/button_divider"
+            android:visibility="gone" />
+        
+        <Button android:id="@+id/button2"
+            android:layout_width="0dip" android:layout_height="fill_parent" 
+            android:layout_weight="1.0"
+            android:maxLines="2"
+            android:layout_marginLeft="0dip"
+            android:layout_marginRight="0dip"
+            style="@style/ButtonStyle"/>
+        
+     </LinearLayout>
+</LinearLayout>

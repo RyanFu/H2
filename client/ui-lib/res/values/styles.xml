@@ -1,0 +1,119 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar" />
+
+    <style name="WindowTitleBackground">
+        <item name="android:background">@drawable/title_bar_bg</item>
+    </style>
+
+    <style name="PreferenceWindowTitleText">
+        <item name="android:textSize">@dimen/title_bar_text_size</item>
+        <item name="android:textColor">@color/title_text_color</item>
+        <item name="android:paddingLeft">@dimen/title_text_pading_left</item>
+    </style>
+
+    <style name="MNoTitleActivity" parent="android:Theme.Light.NoTitleBar" />
+    
+    <style name="MActivity" parent="android:Theme.Light">
+        <item name="android:windowTitleSize">@dimen/theme_activity_title_height</item>
+        <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
+        <item name="android:windowBackground">@color/settings_activity_windows_background</item>
+        <item name="android:windowTitleStyle">@style/PreferenceWindowTitleText</item>
+    </style>
+    
+    <style name="fillx">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="filly">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="fillall">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="pageIndexStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/pages_index_margin</item>
+        <item name="android:background">@color/pages_index_background_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">@dimen/pages_index_padding_bottom</item>
+        <item name="android:paddingLeft">@dimen/pages_index_padding_left</item>
+        <item name="android:paddingRight">@dimen/pages_index_padding_right</item>
+        <item name="android:paddingTop">@dimen/pages_index_padding_top</item>
+        <item name="android:textSize">@dimen/pages_index_text_size</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">#FFFF00</item>
+    </style>
+
+    <style name="pageIndexStyleBottom" parent="pageIndexStyle">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="pageIndexStyleBottomLeft" parent="pageIndexStyle">
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+    
+    <style name="pageIndexStyleTop" parent="pageIndexStyle">
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="customProgressBar" parent="@android:style/Widget.ProgressBar">
+        <item name="android:progressDrawable">@drawable/progress_bar_loading</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_bar_loading</item>
+    </style>
+
+    <color name="pages_index_background_color">@color/custom_click_mask_color</color>
+
+    <style name="ButtonStyle" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_bg</item>
+        <item name="android:textColor">@color/button_text</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+    </style>
+
+    <style name="DialogActivity" parent="@android:style/Theme.Dialog">
+        <item name="android:background">@null</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:background">@drawable/btn</item>
+        <item name="android:textColor">@color/button_text</item>
+        <item name="android:textSize">@dimen/dialog_button_text_size</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="exitWrapper" parent="fillx">
+        <item name="android:background">@drawable/button_bg</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">5dip</item>
+    </style>
+
+    <style name="exitText">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">@dimen/dialog_button_text_size</item>
+        <item name="android:padding">5dip</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+</resources>

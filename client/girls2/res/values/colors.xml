@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="thumb_text_bg_color">#af3f3f3f</color>
+    <color name="base_start_color_default">#e3e3e3</color>
+    <color name="base_end_color_default">#e3e3e3</color>
+    <color name="base_start_color_pressed">#ffdfdf00</color>
+    <color name="base_end_color_pressed">#ffcfcf00</color>
+
+</resources>

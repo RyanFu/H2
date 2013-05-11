@@ -1,0 +1,53 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">핫 섹시한 여자</string>
+    <string name="loading">로드…</string>
+    <string name="network_error_or_updating">오류가 당신이 최신 버전을 사용하고 있는지 확인, 네트워크가 연결되어 있습니다.</string>
+    <string name="album_updated"><xliff:g id="count">%d</xliff:g> 새 앨범은로드</string>
+    <string name="msg_private_enabled">이봐, 서 주셔서 감사합니다, 당신은 몇 가지 독점적 인 사진을 참조하십시오. 항상 오를 입력 할 MENU 키를 가리킬 수 있습니다.</string>
+    <string name="msg_review">야, 항상 지원 그것을 우리의 평가에 Google 플레이로 이동하거나 동생을보고 싶은지에 대해 얘기 주셔서 감사합니다.</string>
+    <string name="ok">좋은</string>
+    <string name="cancel">종료</string>
+    <string name="current_level">현재 통합  %s</string>
+    <string name="current_go_level">필수 %d 점을 엽니 다</string>
+    <string name="current_unlocked_level">레벨 %d (잠금 해제)</string>
+    <string name="current_level_1">점수 : %d</string>
+    <string name="current_page">페이지 : %d</string>
+    <string name="dialog_review_title">100 포인트를 무료로 이용하실 수</string>
+    <string name="dialog_review_content">100 점에 대한 칭찬하는 Google로 이동, 신속하고 무료로 이용할 수！</string>
+    <string name="dialog_rate_title">우리에게 메시지를 남겨주세요</string>
+    <string name="dialog_rate_content">또한 아름다움의 유형, Google 시장으로 가서보고 싶은 것은 우리에게 알려줍니다！</string>
+    <string name="dialog_more_title">충분히 보지 못</string>
+    <string name="dialog_more_content">아름다운 여자의 온라인 아름다움과 수천을 시도 피곤하지 못할！</string>
+    <string name="exit_dialog_more_girl_text">더 많은 여자를 볼 HD 버전을 다운로드</string>
+    <string name="exit_dialog_support_text">이거 맘에 들어! 평가. \n 당신을 감사합니다 :)</string>
+    <string name="exit_dialog_exit_text">다음번!</string>
+    <string name="e_gallery_dialog_goto_index">향하는</string>
+    <string name="favorite_button_text">즐겨 찾기</string>
+    <string name="more_button_text">더 아름다운</string>
+    <string name="favorite_button_text_null_msg">즐겨 찾기 비어 아! \(^_^)/~~~</string>
+    <string name="favorite_null_msg">모든 사진 안 돼 즐겨 찾기! \(^_^)/~~~</string>
+    <string name="try_online">%d 아름다운 여자는 온라인으로 아 기다리고</string>
+    <string name="try_online_download">다운로드로 이동</string>
+
+    <string name="share_title">몫</string>
+    <string name="set_as_wallpaper">바탕 화면으로 설정</string>
+    <string name="share_text">아름다운 여성의 온라인 시계 수천, 재 샘플, 일일 절대 업데이트하지 않습니다. 비공개 앨범, 고급 원인의 아름다움 만에 코피 잠금을 해제 할 수 있습니다. 공유 주소 : %s 의</string>
+    
+    <string name="pic_widget_reset">재설정</string>
+    <string name="navigation_rank_center">순위</string>
+    <string name="thumb_up_request_failed">최신 버전이있는 경우 네트워크를 확인하거나 참조하시기 바랍니다！</string>
+    <string name="navigation_rank_center_view_failed">목록은 가져 오지 못했습니다,\n 네트워크를 확인하거나 최신 버전이없는, 다시 시도하십시오！</string>
+    <string name="navigation_rank_center_view_blank">순위는 유지 보수를 위해 다운...</string>
+    <string name="navigation_rank_center_view_retry">재시도</string>
+    <string name="navigation_rank_center_view_setting">설정</string>
+    
+    <string name="navigation_rank_center_latest">최신 목록</string>
+    <string name="navigation_rank_center_weeky">주 랭킹</string>
+    <string name="navigation_rank_center_monthy">월간 랭킹</string>
+    
+    <string name="navigation_rank_center_version_name">현재 버전：%s</string>
+    <string name="navigation_rank_center_verion_unknow">알 수없는</string>
+    <string name="navigation_rank_center_support">메세지를 남겨주세요</string>
+    <string name="navigation_rank_center_contact_us">저자에게 문의</string>
+</resources>

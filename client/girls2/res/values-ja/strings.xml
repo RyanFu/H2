@@ -1,0 +1,63 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">Hot Sexy Asian Girls</string>
+    <string name="loading">Loading…</string>
+    <string name="network_error_or_updating">An error just happened, please make sure you are using the latest version. Or check your network connection and come back later.</string>
+    <string name="album_updated"><xliff:g id="count">%d</xliff:g> new album loaded</string>
+    <string name="msg_private_enabled">Hey, thank you for coming back, we have some exclusive pictures for you :-) You can press Menu key anytime to check it out.</string>
+    <string name="msg_review">いつも,ありがとう,アプの評価とか好きのタイプとかにGoogleの市場に行きましょう.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="current_level">現在のスコア: %s</string>
+    <string name="current_go_level">次のレベルへ  %d 点が必要</string>
+    <string name="current_unlocked_level">レベル  %d （アンロック）</string>
+    <string name="current_level_1">スコア: %s</string>
+    <string name="current_page">番号: %s</string>
+
+    <string name="dialog_review_title">無料で100ポイント取り</string>
+    <string name="dialog_review_content">迅速Googleの市場に行ってアプの好評して100ポイントを取りましょう！</string>
+    <string name="dialog_rate_title">メッセージを残し</string>
+    <string name="dialog_rate_content">好きのタイプは？Googleの市場にメッセージを残りましょう！</string>
+    <string name="dialog_more_title">足りませんか</string>
+    <string name="dialog_more_content">もっと、たくさんの美人をオンライン版で試しましょう！试试在线美女，上千美女百看不厌！</string>
+        
+    <string name="exit_dialog_more_girl_text">HDバージョンで超美人を見ましょう</string>
+    <string name="exit_dialog_support_text">すばらしい！好評をあげましょう</string>
+    <string name="exit_dialog_exit_text">まだ今度</string>
+    
+    <string name="e_gallery_detail_image_save_error_title">格納失敗</string>
+    <string name="e_gallery_detail_image_save_error_msg">SDCardが使えない</string>
+    <string name="e_gallery_detail_image_save_fail_msg">格納失敗</string>
+    <string name="e_gallery_detail_image_save_success_msg">格納成功：%s</string>
+    
+    <string name="e_gallery_detail_image_save">格納</string>
+    <string name="e_gallery_detail_image_cancel">Cancel</string>
+    
+    <string name="e_gallery_dialog_goto_index">ところへ</string>
+    <string name="favorite_button_text">お気に入り</string>
+    <string name="more_button_text">もっと美人</string>
+    <string name="favorite_button_text_null_msg">お気に入り箱は何もないよ! \(^_^)/~~~</string>
+    <string name="favorite_null_msg">まだ何もお気に入り箱にいれませんよ! \(^_^)/~~~</string>
+    <string name="try_online">%d 位美人が待ってるよ！</string>
+    <string name="try_online_download">ダウンロード</string>
+    <string name="share_title">シェア</string>
+    <string name="set_as_wallpaper">壁紙として設定</string>
+    <string name="share_text">毎日更新, たくさんの美人写真、鼻血感想をオンライン版で試しましょう。共有アドレは％s</string>
+    
+    <string name="pic_widget_reset">リセット</string>
+    <string name="navigation_rank_center">ランキング</string>
+    <string name="thumb_up_request_failed">ネットワークをチェックしたり、最新バージョンがあるかどうかを確認してください！</string>
+    <string name="navigation_rank_center_view_failed">リストを失敗した、\ nネットワークをチェックしたり、最新バージョンがあるかどうかを確認してから、リトライしてください！</string>
+    <string name="navigation_rank_center_view_blank">ランキングはメンテナンスのためダウンしています...</string>
+    <string name="navigation_rank_center_view_retry">リトライ</string>
+    <string name="navigation_rank_center_view_setting">セットアップ</string>
+    
+    <string name="navigation_rank_center_latest">最新のリスト</string>
+    <string name="navigation_rank_center_weeky">週間ランキング</string>
+    <string name="navigation_rank_center_monthy">月間ランキング</string>
+    
+    <string name="navigation_rank_center_version_name">現バージョン：%s</string>
+    <string name="navigation_rank_center_verion_unknow">不明</string>
+    <string name="navigation_rank_center_support">メッセージを残す</string>
+    <string name="navigation_rank_center_contact_us">作者に連絡</string>
+</resources>

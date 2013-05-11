@@ -1,0 +1,44 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="e_gallery_templetes">
+        <item>e_pic_pages_templete1</item>
+        <item>e_pic_pages_templete2</item>
+        <item>e_pic_pages_templete3</item>
+        <item>e_pic_pages_templete4</item>
+        <item>e_pic_pages_templete5</item>
+        <item>e_pic_pages_templete6</item>
+    </string-array>
+    <string-array name="jazzy_effects">
+        <item>Standard</item>
+        <item>Tablet</item>
+        <item>CubeIn</item>
+        <item>CubeOut</item>
+        <item>FlipVertical</item>
+        <item>FlipHorizontal</item>
+        <item>Stack</item>
+        <item>ZoomIn</item>
+        <item>ZoomOut</item>
+        <item>RotateUp</item>
+        <item>RotateDown</item>
+        <item>Accordion</item>
+    </string-array>
+
+    <integer name="e_navigation_max_level">3</integer>
+
+    <string-array name="image_arc_menu_items">
+        <item>set_as_wallpaper</item>
+        <item>share_with</item>
+        <item>slide_view</item>
+    </string-array>
+    <string-array name="e_navigation_level_res_prefix">
+        <item>images</item>
+        <item>images02</item>
+        <item>images03</item>
+    </string-array>
+    <string-array name="e_navigation_level_res_prefix_asset">
+        <item>p1</item>
+        <item>p2</item>
+        <item>p3</item>
+    </string-array>
+
+</resources>

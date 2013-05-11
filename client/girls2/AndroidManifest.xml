@@ -1,0 +1,89 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pretty.girl.app"
+    android:versionCode="26"
+    android:versionName="2.6" 
+	>
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="14" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
+    <application
+        android:name="com.prettygirl.app.Application"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5132fa2652701540c6000071" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="gplay" />
+        <meta-data
+            android:name="OFFLINE"
+            android:value="false" />
+
+        <activity
+            android:name="com.prettygirl.app.AlbumListActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize" >
+        </activity>
+        <activity
+            android:name="com.prettygirl.app.NavigationActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@style/MActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.prettygirl.app.RankActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.prettygirl.app.GalleryActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.prettygirl.app.ImageEditorActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.prettygirl.app.OnlineTryGalleryActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.prettygirl.app.GalleryDetailActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.prettygirl.app.ExclusiveAlbumListActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity
+            android:name="com.prettygirl.app.gallery.GalleryActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity
+            android:name="com.prettygirl.app.gallery.OriginalImageActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize" />
+    </application>
+
+</manifest>

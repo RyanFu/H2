@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/fillall"
+    android:background="#80ffffff"
+    android:paddingBottom="20dip"
+    android:paddingTop="20dip" >
+
+    <TextView
+        android:id="@+id/txt"
+        style="@style/wrap"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dip"
+        android:text="@string/loading"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@style/wrap"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/txt"
+        android:indeterminate="true" />
+
+</RelativeLayout>

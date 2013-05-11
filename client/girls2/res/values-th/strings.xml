@@ -1,0 +1,58 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">สาวร้อน</string>
+    <string name="loading">โหลด…</string>
+    <string name="network_error_or_updating">ข้อผิดพลาดที่เกิดขึ้นเพียงโปรดให้แน่ใจว่าคุณกำลังใช้รุ่นล่าสุด หรือตรวจสอบการเชื่อมเครือข่ายของคุณและกลับมาใหม่</string>
+    <string name="album_updated"><xliff:g id="count">%d</xliff:g> อัลบั้มใหม่โหลด</string>
+    <string name="msg_private_enabled">Dude ขอขอบคุณสำหรับการยืนคุณจะเห็นภาพพิเศษบางอย่าง เสมอสามารถชี้ปุ่มเมนูเพื่อป้อนโอ้</string>
+    <string name="msg_review">Dude, ขอขอบคุณสำหรับเสมอสนับสนุนไปสู่การเล่น Google เพื่อการประเมินของเราของมันหรือพูดคุยเกี่ยวกับสิ่งที่คุณต้องการที่จะเห็นน้องสาว</string>
+    <string name="ok">ดี</string>
+    <string name="cancel">เลิก</string>
+    
+    <string name="current_level">คะแนนปัจจุบัน: %s</string>
+    <string name="current_go_level">เปิดที่จำเป็น %d คะแนน</string>
+    <string name="current_unlocked_level">ระดับที่  %d (ปลดล็อค)</string>
+    <string name="current_level_1">คะแนน: %s</string>
+    <string name="current_page">หน้า: %s</string>
+    
+    <string name="dialog_review_title">เข้าฟรี 100 คะแนน</string>
+    <string name="dialog_review_content">Go to Google สรรเสริญ, เข้าถึงได้ทันทีและฟรีถึง 100 จุด！</string>
+    <string name="dialog_rate_title">ฝากข้อความถึงเรา</string>
+    <string name="dialog_rate_content">ยังต้องการเห็นสิ่งที่ประเภทของความงามไปที่ตลาดของ Google บอกเรา！</string>
+    <string name="dialog_more_title">ไม่เห็นพอ</string>
+    <string name="dialog_more_content">ลองความงามออนไลน์และจำนวนของผู้หญิงที่สวยไม่เคยได้รับเหนื่อย！</string>
+        
+    <string name="exit_dialog_more_girl_text">ดาวน์โหลดรุ่น HD เพื่อดูสวยงามมากขึ้น</string>
+    <string name="exit_dialog_support_text">สนับสนุนเราอัตรา, app \n ขอบคุณ:)</string>
+    <string name="exit_dialog_exit_text">เลิก</string>
+    
+    <string name="e_gallery_dialog_goto_index">ชะตา</string>
+    <string name="favorite_button_text">รายการโปรด</string>
+    <string name="more_button_text">สวยงามมากขึ้น</string>
+    <string name="favorite_button_text_null_msg">โอ้ว่างที่ชื่นชอบ! \(^_^)/~~~</string>
+    <string name="favorite_null_msg">ๆ ภาพโอ้ไม่มีรายการโปรด! \(^_^)/~~~</string>
+    <string name="try_online">%d ผู้หญิงสวยออนไลน์ที่รอให้คุณโอ้</string>
+    <string name="try_online_download">ไปดาวน์โหลด</string>
+    
+    <string name="share_title">หุ้น</string>
+    <string name="set_as_wallpaper">ตั้งเป็นวอลล์เปเปอร์</string>
+    <string name="share_text">พันนาฬิกาออนไลน์ของผู้หญิงสวยอัพเดททุกวันไม่เคยอีกตัวอย่าง สามารถปลดล็อคอัลบั้มส่วนตัวสาเหตุพิเศษเลือดกำเดาบนอ่าวงาม ที่อยู่แบ่งปัน: %s</string>
+    
+    <string name="pic_widget_reset">ตั้งใหม่</string>
+
+    <string name="navigation_rank_center">การจัดอันดับ</string>
+    <string name="thumb_up_request_failed">กรุณาตรวจสอบเครือข่ายของคุณหรือดูว่ามีรุ่นล่าสุด！</string>
+    <string name="navigation_rank_center_view_failed">ได้รับรายชื่อล้มเหลว  \nกรุณาตรวจสอบเครือข่ายของคุณหรือไม่ต้องมีรุ่นล่าสุดอีกครั้ง！</string>
+    <string name="navigation_rank_center_view_blank">การจัดอันดับจะลดลงสำหรับการบำรุงรักษา...</string>
+    <string name="navigation_rank_center_view_retry">พยายามอีก</string>
+    <string name="navigation_rank_center_view_setting">จัดตั้งขึ้น</string>
+    
+    <string name="navigation_rank_center_latest">รายการล่าสุด</string>
+    <string name="navigation_rank_center_weeky">การจัดอันดับสัปดาห์</string>
+    <string name="navigation_rank_center_monthy">การจัดอันดับรายเดือน</string>
+    
+    <string name="navigation_rank_center_version_name">รุ่นปัจจุบัน：%s</string>
+    <string name="navigation_rank_center_verion_unknow">ไม่ทราบ</string>
+    <string name="navigation_rank_center_support">ฝากข้อความไว้</string>
+    <string name="navigation_rank_center_contact_us">ติดต่อผู้เขียน</string>
+</resources>

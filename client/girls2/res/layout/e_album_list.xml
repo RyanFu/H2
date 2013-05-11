@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/fillall" >
+
+    <com.google.ads.AdView
+        android:id="@+id/ad"
+        style="@style/wrap"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="a15072e7240cfcc"
+        ads:loadAdOnCreate="true"
+        ads:testDevices="4ED912255E5FEAA1D6BEBF3072EA979B" />
+
+    <ListView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/album_list"
+        style="@style/fillall"
+        android:layout_above="@id/ad"
+        android:background="#000000"
+        android:cacheColorHint="@null"
+        android:divider="#80ffffff"
+        android:dividerHeight="1dip"
+        android:fadingEdge="none" />
+
+</RelativeLayout>

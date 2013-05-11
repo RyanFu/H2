@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/textView_level"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/custom_background_color"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:background="@color/custom_background_color" >
+
+        <LinearLayout
+            android:id="@+id/navigationImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="6dip" >
+
+                <com.prettygirl.app.components.NavigationImageView
+                    android:id="@+id/navigationImageView1"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingLeft="6dip" />
+
+                <com.prettygirl.app.components.NavigationImageView
+                    android:id="@+id/navigationImageView2"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingRight="6dip" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <com.prettygirl.app.components.NavigationImageView
+                    android:id="@+id/navigationImageView3"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingLeft="6dip" />
+
+                <com.prettygirl.app.components.NavigationImageView
+                    android:id="@+id/navigationImageView4"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingRight="6dip" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_count"
+            style="@style/pageIndexStyleBottom"
+            android:paddingBottom="8dip"
+            android:shadowColor="#ff000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/image_mask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:background="@color/custom_locked_mask_color"
+            android:scaleType="center"
+            android:src="@drawable/e_locked" />
+    </RelativeLayout>
+
+</merge>

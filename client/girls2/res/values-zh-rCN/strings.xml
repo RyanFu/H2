@@ -1,0 +1,65 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">热辣媚娘</string>
+    <string name="loading">加载中…</string>
+    <string name="network_error_or_updating">出错了， 请检查你是否正在使用最新版本，网络是否连通。</string>
+    <string name="album_updated">更新了 <xliff:g id="count">%d</xliff:g> 个新专辑</string>
+    <string name="msg_private_enabled">哥们， 谢谢你一直支持，请你看一些独家图片吧。以后可以随时点菜单键进入哦。</string>
+    <string name="msg_review">哥们， 谢谢你一直支持，去谷歌市场给我们评个分吧， 或者说说你还想看什么妹子。</string>
+    <string name="ok">好的</string>
+    <string name="cancel">退出</string>
+    
+    <string name="current_level">当前积分为: %s</string>
+    <string name="current_go_level">开启下一级需 %d 积分</string>
+    <string name="current_unlocked_level">等级  %d (已解锁)</string>
+    <string name="current_level_1">积分: %s</string>
+    <string name="current_page">页码: %s</string>
+    
+    <string name="dialog_review_title">免费获取100个积分</string>
+    <string name="dialog_review_content">去谷歌市场给个好评， 立即免费获得100积分！</string>
+    <string name="dialog_rate_title">给我们留个言吧</string>
+    <string name="dialog_rate_content">还想看什么类型的美女， 去谷歌市场告诉我们吧！</string>
+    <string name="dialog_more_title">没看够</string>
+    <string name="dialog_more_content">试试在线美女，上千美女百看不厌！</string>
+    
+    <string name="exit_dialog_more_girl_text">看看更多高清美女HD专辑？</string>
+    <string name="exit_dialog_support_text">求好评，支持一下。</string>
+    <string name="exit_dialog_exit_text">退出</string>
+
+    <string name="e_gallery_detail_image_save_error_title">保存失败</string>
+    <string name="e_gallery_detail_image_save_error_msg">SDCard不可使用</string>
+    <string name="e_gallery_detail_image_save_fail_msg">保存失败</string>
+    <string name="e_gallery_detail_image_save_success_msg">保存成功：%s</string>
+    
+    <string name="e_gallery_detail_image_save">保存</string>
+    <string name="e_gallery_detail_image_cancel">取消</string>
+    
+    <string name="e_gallery_dialog_goto_index">去往</string>
+    <string name="favorite_button_text">收藏夹</string>
+    <string name="more_button_text">更多美女</string>
+    <string name="favorite_button_text_null_msg">收藏夹中还是空的哦! \(^_^)/~~~</string>
+    <string name="favorite_null_msg">还没有收藏任何图片哦! \(^_^)/~~~</string>
+    <string name="try_online">%d 位美女在线等你哦</string>
+    <string name="try_online_download">去下载</string>
+    
+    <string name="share_title">分  享</string>
+    <string name="set_as_wallpaper">设为壁纸</string>
+    <string name="share_text">在线观看上万美女,每日更新,绝不重样。更可以解锁私密专辑，独享令人鼻血上涌的美女。分享地址 : %s</string>
+    
+    <string name="pic_widget_reset">重置</string>
+    <string name="navigation_rank_center">排行榜</string>
+    <string name="thumb_up_request_failed">请检查你的网络或者看看有没有最新版本！</string>
+    <string name="navigation_rank_center_view_failed">获取排行榜失败，\n请检查你的网络或者看看有没有最新版本之后,重试！</string>
+    <string name="navigation_rank_center_view_blank">排行榜正在维护中...</string>
+    <string name="navigation_rank_center_view_retry">重试</string>
+    <string name="navigation_rank_center_view_setting">设置</string>
+    
+    <string name="navigation_rank_center_latest">最新排行榜</string>
+    <string name="navigation_rank_center_weeky">周排行榜</string>
+    <string name="navigation_rank_center_monthy">月排行榜</string>
+    
+    <string name="navigation_rank_center_version_name">当前版本：%s</string>
+    <string name="navigation_rank_center_verion_unknow">未知</string>
+    <string name="navigation_rank_center_support">留言</string>
+    <string name="navigation_rank_center_contact_us">联系作者</string>
+</resources>
