@@ -55,7 +55,7 @@ public class AvGalleryDetailActivity extends AdTitleBaseActivity implements OnCl
 
             @Override
             protected Integer doInBackground(Void... params) {
-                String url = "http://106.187.48.40/jp/" + mGirl.id + "/n";
+                String url = ServerUtils.getPicServerRoot(AvGalleryDetailActivity.this) + "/jp/" + mGirl.id + "/n";
                 int r = 0;
                 try {
                     String s = readUrl(url);

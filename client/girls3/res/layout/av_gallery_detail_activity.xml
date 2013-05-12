@@ -17,14 +17,6 @@
         android:layout_weight="1" >
     </WebView>
 
-    <com.google.ads.AdView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-        android:id="@+id/ad"
-        style="@style/wrap"
-        android:layout_gravity="center"
-        ads:adSize="BANNER"
-        ads:adUnitId="a151519c45abdc0"
-        ads:loadAdOnCreate="true" />
+    <include layout="@layout/e_admob" />
 
 </LinearLayout>

@@ -32,12 +32,12 @@
                 android:layout_marginRight="5dp"
                 android:background="@drawable/bottom_view_bg"
                 android:gravity="center"
-                android:textColor="@color/dialog_text_light"
+                android:shadowColor="@color/title_text_color"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="2"
-                android:shadowColor="@color/title_text_color"
-                android:text="@string/pic_widget_reset" />
+                android:text="@string/pic_widget_reset"
+                android:textColor="@color/dialog_text_light" />
 
             <ImageView
                 android:id="@+id/picture_rotate_left"
@@ -82,7 +82,7 @@
                 android:background="@drawable/bottom_view_bg"
                 android:gravity="center"
                 android:src="@drawable/pic_zoom_out" />
-            
+
             <Button
                 android:id="@+id/picture_widget_save"
                 style="@style/Button"
@@ -92,13 +92,12 @@
                 android:layout_marginRight="5dp"
                 android:background="@drawable/bottom_view_bg"
                 android:gravity="center"
-                android:textColor="@color/dialog_text_light"
+                android:shadowColor="@color/title_text_color"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="2"
-                android:shadowColor="@color/title_text_color"
-                android:text="@string/e_gallery_detail_image_save" />
-            
+                android:text="@string/e_gallery_detail_image_save"
+                android:textColor="@color/dialog_text_light" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -138,14 +137,6 @@
             android:text="@string/e_gallery_detail_image_save" />
     </LinearLayout>
 
-    <com.google.ads.AdView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-        android:id="@+id/ad"
-        style="@style/wrap"
-        android:layout_gravity="center"
-        ads:adSize="BANNER"
-        ads:adUnitId="a151519c45abdc0"
-        ads:loadAdOnCreate="true" />
-    
+    <include layout="@layout/e_admob" />
+
 </LinearLayout>
