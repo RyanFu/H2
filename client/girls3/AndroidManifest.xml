@@ -19,6 +19,12 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/MActivity" >
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="518f8a6356240bb21c01c473" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="gplay" />
         <activity
             android:name="com.prettygirl.avgallery.AvGalleryMainActivity"
             android:label="@string/app_name" >

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AV宝典</string>
+    <string name="app_name">日本艾薇百科</string>
     <string name="exit_dialog_more_girl_text">看看更多更有诱惑的应用？</string>
     <string name="exit_dialog_support_text">求好评，支持一下。</string>
     <string name="exit_dialog_exit_text">退出</string>
