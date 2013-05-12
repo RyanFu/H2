@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical" >
 
     <com.prettygirl.avgallery.components.ScrollerView
@@ -15,5 +16,15 @@
         android:layout_height="0dip"
         android:layout_weight="1" >
     </WebView>
+
+    <com.google.ads.AdView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@+id/ad"
+        style="@style/wrap"
+        android:layout_gravity="center"
+        ads:adSize="BANNER"
+        ads:adUnitId="a151519c45abdc0"
+        ads:loadAdOnCreate="true" />
 
 </LinearLayout>
