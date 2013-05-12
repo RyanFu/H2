@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/filly" android:id="@+id/moretxt"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="50dip"
+    android:text="@string/more"
+    android:textAppearance="?android:attr/textAppearanceLarge" />
