@@ -39,7 +39,7 @@ public class AvGalleryMainActivity extends BaseActivity {
         mGirls = ((AvApplication) getApplicationContext()).getGirlList(mLang);
 
         GridView mGridView = (GridView) findViewById(R.id.av_gallery_grid_view);
-//        mGridView.setFastScrollEnabled(true);
+        //        mGridView.setFastScrollEnabled(true);
         mGridView.setAdapter(new AVAdapter());
         mGridView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -104,7 +104,7 @@ public class AvGalleryMainActivity extends BaseActivity {
             }
             AVGirl girl = mGirls.get(position);
             ImageLoader.getInstance().cancelDisplayTask(cViewHolder.imageView);
-            ImageLoader.getInstance().displayImage("assets://icons/" + girl.id + ".png", cViewHolder.imageView);
+            ImageLoader.getInstance().displayImage("assets://icons/" + girl.id + ".jpg", cViewHolder.imageView);
             cViewHolder.mNameView.setText(girl.name);
             cViewHolder.mSubView.setText(girl.subTilte);
             return convertView;
