@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.prettygirl.app.utils.Utils;
 import com.prettygirl.avgallery.GalleryDetailActivity;
+import com.prettygirl.avgallery1.R;
 
 public class ScrollerView extends HorizontalScrollView implements Runnable {
 
@@ -44,39 +46,24 @@ public class ScrollerView extends HorizontalScrollView implements Runnable {
         container.removeAllViews();
         int margin = (int) Utils.dip2px(getContext(), 3);
         String url = null;
-        for (int index = 0, size = urls.size(); index < size; index++) {
+        for (int index = 0, size = urls.size(); index < size && index < 10; index++) {
             url = urls.get(index);
             ImageView v = new ImageView(getContext());
-            @SuppressWarnings("deprecation")
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-                    LayoutParams.FILL_PARENT);
+                    LayoutParams.MATCH_PARENT);
             lp.leftMargin = margin;
             lp.rightMargin = margin;
             v.setScaleType(ScaleType.CENTER_INSIDE);
             v.setAdjustViewBounds(true);
             v.setTag("" + index);
-            v.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    Object obj = v.getTag();
-                    if (obj == null || !(obj instanceof String)) {
-                        return;
-                    }
-                    int index = 0;
-                    try {
-                        index = Integer.valueOf((String) obj);
-                    } catch (Exception e) {
-                    }
-                    Intent intent = new Intent();
-                    intent.setClass(mActivity, GalleryDetailActivity.class);
-                    intent.putExtra(GalleryDetailActivity.EXT_IMAGE_INDEX, index);
-                    intent.putExtra(GalleryDetailActivity.EXT_IMAGE_LIST, urls);
-                    mActivity.startActivity(intent);
-                }
-            });
+            v.setOnClickListener(new MyOnclickListener(urls));
             container.addView(v, lp);
             ImageLoader.getInstance().displayImage(url, v);
+        }
+        if (urls.size() >= 10) {
+            View v = LayoutInflater.from(getContext()).inflate(R.layout.more_txt, container);
+            v.findViewById(R.id.moretxt).setOnClickListener(new MyOnclickListener(urls));
+            v.findViewById(R.id.moretxt).setTag("9");
         }
         setAutoPlay(autoPlay);
     }
@@ -108,4 +95,29 @@ public class ScrollerView extends HorizontalScrollView implements Runnable {
         }
     }
 
+    class MyOnclickListener implements OnClickListener {
+        private ArrayList<String> urls;
+
+        MyOnclickListener(ArrayList<String> urls) {
+            this.urls = urls;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Object obj = v.getTag();
+            if (obj == null || !(obj instanceof String)) {
+                return;
+            }
+            int index = 0;
+            try {
+                index = Integer.valueOf((String) obj);
+            } catch (Exception e) {
+            }
+            Intent intent = new Intent();
+            intent.setClass(mActivity, GalleryDetailActivity.class);
+            intent.putExtra(GalleryDetailActivity.EXT_IMAGE_INDEX, index);
+            intent.putExtra(GalleryDetailActivity.EXT_IMAGE_LIST, urls);
+            mActivity.startActivity(intent);
+        }
+    }
 }
