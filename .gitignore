@@ -3,4 +3,4 @@ gen/*
 client/*/bin
 client/*/gen
 client/*/assets
-./res
+res/*
