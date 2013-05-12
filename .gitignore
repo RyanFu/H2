@@ -4,3 +4,4 @@ client/*/bin
 client/*/gen
 client/*/assets
 res/*
+keystore.key
