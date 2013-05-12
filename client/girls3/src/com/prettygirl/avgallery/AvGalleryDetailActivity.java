@@ -4,10 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,8 +26,6 @@ import com.umeng.analytics.MobclickAgent;
 public class AvGalleryDetailActivity extends AdTitleBaseActivity implements OnClickListener {
 
     private AVGirl mGirl;
-
-    private DecimalFormat decimalFormat = new DecimalFormat("000");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
