@@ -797,8 +797,8 @@ Android Current Ant Build. Available targets:
             package.name="com.prettygirl.app"
             umeng.channel="gplay"
             umeng.key="5132fa2652701540c6000071"
-            version.code="25"
-            version.name="2.5" />
+            version.code="26"
+            version.name="2.6" />
 
         <antcall target="reset-git" />
     </target>
@@ -810,152 +810,152 @@ Android Current Ant Build. Available targets:
             package.name="com.prettygirl.i0001"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="美腿之Tracy"
             package.name="com.prettygirl.i0002"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="美腿之Tammy"
             package.name="com.prettygirl.i0003"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="美腿诱惑"
             package.name="com.prettygirl.i0004"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="美空美女刘羽琦"
             package.name="com.prettygirl.i0005"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="背影的遐想"
             package.name="com.prettygirl.i0006"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="性感内衣秀"
             package.name="com.prettygirl.i0007"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="狂野诱惑"
             package.name="com.prettygirl.i0009"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="惊爆小清新"
             package.name="com.prettygirl.i0010"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="妖娆之美"
             package.name="com.prettygirl.i0013"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="性感车模"
             package.name="com.prettygirl.i0014"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="优美动人"
             package.name="com.prettygirl.i0015"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="清纯MM特写二"
             package.name="com.prettygirl.i0016"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="睡美人"
             package.name="com.prettygirl.i0017"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="优美神态"
             package.name="com.prettygirl.i0019"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="萌妹子之冯雨芝"
             package.name="com.prettygirl.i0020"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="清纯MM特写一"
             package.name="com.prettygirl.i0021"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="性感美女"
             package.name="com.prettygirl.i0022"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="张馨予合集"
             package.name="com.prettygirl.i0023"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <antcall target="reset-git" />
     </target>
@@ -967,48 +967,48 @@ Android Current Ant Build. Available targets:
             package.name="com.zn.chenxinyu0003"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="小清新张馨予"
             package.name="com.zn.cangjingkong0007"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="长腿美女"
             package.name="com.zn.zhangxinyu0004"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="可爱萝莉"
             package.name="com.zn.zhouweitong0005"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="AngelaBaby特写"
             package.name="com.rose.a0007"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <build.package.offline
             app.name="长腿美女之Vanessa"
             package.name="com.zn.ganlulu0002"
             umeng.channel="gplay"
             umeng.key="501d0ca6527015283f000013"
-            version.code="37"
-            version.name="3.7" />
+            version.code="38"
+            version.name="3.8" />
 
         <antcall target="reset-git" />
     </target>
