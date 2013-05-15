@@ -74,7 +74,10 @@ public class NavigationActivity extends BaseActivity implements OnClickListener,
         findViewById(R.id.navigation_rank_center_support).setOnClickListener(this);
         findViewById(R.id.navigation_rank_center_contact_us).setOnClickListener(this);
 
-        findViewById(R.id.navigation_rank_center).setOnClickListener(this);
+        //        findViewById(R.id.navigation_rank_center).setOnClickListener(this);
+        findViewById(R.id.navigation_rank_center_latest1).setOnClickListener(this);
+        findViewById(R.id.navigation_rank_center_weeky1).setOnClickListener(this);
+        findViewById(R.id.navigation_rank_center_monthy1).setOnClickListener(this);
         findViewById(R.id.favorite_button).setOnClickListener(this);
         findViewById(R.id.more_button).setOnClickListener(this);
         findViewById(R.id.share_button).setOnClickListener(this);
@@ -111,7 +114,10 @@ public class NavigationActivity extends BaseActivity implements OnClickListener,
         String value = MobclickAgent
                 .getConfigParams(this, UMengKey.ONLINE_CONFIG_KEY_GALLERY_DETAIL_VIEW_RANK_SHOWABLE);
         if (!TextUtils.isEmpty(value) && !Boolean.valueOf(value)) {
-            findViewById(R.id.navigation_rank_center).setVisibility(View.GONE);
+            //            findViewById(R.id.navigation_rank_center).setVisibility(View.GONE);
+            findViewById(R.id.navigation_rank_center_latest1).setVisibility(View.GONE);
+            findViewById(R.id.navigation_rank_center_weeky1).setVisibility(View.GONE);
+            findViewById(R.id.navigation_rank_center_monthy1).setVisibility(View.GONE);
         }
         mNavigationView.notifyDataChanged();
     }
@@ -151,23 +157,23 @@ public class NavigationActivity extends BaseActivity implements OnClickListener,
         } else if (id == R.id.share_button) {
             MobclickAgent.onEvent(this, UMengKey.NAVIGATION_ACTIVITY_SHARE);
             MiscUtil.shareApp(this);
-        } else if (id == R.id.navigation_rank_center) {
-            mMainView.toggleSidebar();
-        } else if (id == R.id.navigation_rank_center_latest) {
+            //        } else if (id == R.id.navigation_rank_center) {
+            //            mMainView.toggleSidebar();
+        } else if (id == R.id.navigation_rank_center_latest || id == R.id.navigation_rank_center_latest1) {
             MobclickAgent.onEvent(this, UMengKey.NAVIGATION_ACTIVITY_RANK_LATEST);
             mMainView.closeSidebar();
             Intent intent = new Intent();
             intent.setClass(this, RankActivity.class);
             intent.putExtra(RankActivity.EXT_METHOD, ThumbUpManager.RANK_LATEST);
             startActivity(intent);
-        } else if (id == R.id.navigation_rank_center_weeky) {
+        } else if (id == R.id.navigation_rank_center_weeky || id == R.id.navigation_rank_center_weeky1) {
             MobclickAgent.onEvent(this, UMengKey.NAVIGATION_ACTIVITY_RANK_WEEKY);
             mMainView.closeSidebar();
             Intent intent = new Intent();
             intent.setClass(this, RankActivity.class);
             intent.putExtra(RankActivity.EXT_METHOD, ThumbUpManager.RANK_WEEKY);
             startActivity(intent);
-        } else if (id == R.id.navigation_rank_center_monthy) {
+        } else if (id == R.id.navigation_rank_center_monthy || id == R.id.navigation_rank_center_monthy1) {
             MobclickAgent.onEvent(this, UMengKey.NAVIGATION_ACTIVITY_RANK_MONTHY);
             mMainView.closeSidebar();
             Intent intent = new Intent();
