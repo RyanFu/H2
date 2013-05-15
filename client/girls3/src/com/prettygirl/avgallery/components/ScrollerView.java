@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,13 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.prettygirl.app.utils.Utils;
 import com.prettygirl.avgallery.GalleryDetailActivity;
 import com.prettygirl.avgallery1.R;
 
-public class ScrollerView extends HorizontalScrollView implements Runnable {
+public class ScrollerView extends HorizontalScrollView implements Runnable, ImageLoadingListener {
 
     private LinearLayout container;
     private int scrollDirection = LEFT_TO_RIGHT;
@@ -58,7 +61,7 @@ public class ScrollerView extends HorizontalScrollView implements Runnable {
             v.setTag("" + index);
             v.setOnClickListener(new MyOnclickListener(urls));
             container.addView(v, lp);
-            ImageLoader.getInstance().displayImage(url, v);
+            ImageLoader.getInstance().displayImage(url, v, this);
         }
         if (urls.size() >= 10) {
             View v = LayoutInflater.from(getContext()).inflate(R.layout.more_txt, container);
@@ -119,5 +122,25 @@ public class ScrollerView extends HorizontalScrollView implements Runnable {
             intent.putExtra(GalleryDetailActivity.EXT_IMAGE_LIST, urls);
             mActivity.startActivity(intent);
         }
+    }
+
+    @Override
+    public void onLoadingStarted(String imageUri, View view) {
+        // NG
+    }
+
+    @Override
+    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+        // NG
+    }
+
+    @Override
+    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+        setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onLoadingCancelled(String imageUri, View view) {
+        // NG
     }
 }

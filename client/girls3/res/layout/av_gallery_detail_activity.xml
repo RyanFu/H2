@@ -8,7 +8,8 @@
     <com.prettygirl.avgallery.components.ScrollerView
         android:id="@+id/scrollerView"
         android:layout_width="match_parent"
-        android:layout_height="150dip" />
+        android:layout_height="150dip"
+        android:visibility="gone" />
 
     <WebView
         android:id="@+id/main_container_web_view"
