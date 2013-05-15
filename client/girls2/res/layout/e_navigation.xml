@@ -32,7 +32,6 @@
             android:id="@+id/favorite_button"
             android:layout_width="fill_parent"
             android:layout_height="48dip"
-            android:layout_marginBottom="10dip"
             android:layout_marginLeft="5dip"
             android:background="@drawable/thumb_up_left_background"
             android:drawableRight="@drawable/e_favorite_checked"
@@ -53,7 +52,8 @@
             android:paddingRight="5dip"
             android:singleLine="true"
             android:text="@string/share_title"
-            android:textColor="@color/custom_point_text_color" />
+            android:textColor="@color/custom_point_text_color"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
@@ -82,7 +82,6 @@
             android:id="@+id/navigation_rank_center_weeky1"
             android:layout_width="fill_parent"
             android:layout_height="48dip"
-            android:layout_marginBottom="10dip"
             android:layout_marginRight="5dip"
             android:background="@drawable/thumb_up_background"
             android:drawableLeft="@drawable/rank_center"
@@ -117,7 +116,8 @@
             android:paddingLeft="5dip"
             android:singleLine="true"
             android:text="@string/more_button_text"
-            android:textColor="@color/custom_point_text_color" />
+            android:textColor="@color/custom_point_text_color"
+            android:visibility="gone" />
     </LinearLayout>
 
 </RelativeLayout>
