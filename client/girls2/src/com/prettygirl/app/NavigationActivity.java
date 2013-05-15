@@ -81,6 +81,8 @@ public class NavigationActivity extends BaseActivity implements OnClickListener,
         findViewById(R.id.favorite_button).setOnClickListener(this);
         findViewById(R.id.more_button).setOnClickListener(this);
         findViewById(R.id.share_button).setOnClickListener(this);
+        findViewById(R.id.navigation_title_share).setOnClickListener(this);
+        findViewById(R.id.navigation_title_more).setOnClickListener(this);
         UserInfoManager.getInstance().onEvent(UserInfoManager.Event.START_APP);
     }
 
@@ -151,10 +153,10 @@ public class NavigationActivity extends BaseActivity implements OnClickListener,
                 intent.putExtra(GalleryActivity.EXT_TYPE, GalleryActivity.EXT_VALUE_FAVORITE);
                 startActivity(intent);
             }
-        } else if (id == R.id.more_button) {
+        } else if (id == R.id.more_button || id == R.id.navigation_title_more) {
             MobclickAgent.onEvent(this, UMengKey.NAVIGATION_ACTIVITY_MORE);
             MiscUtil.startGooglePlayByAuthor(view.getContext());
-        } else if (id == R.id.share_button) {
+        } else if (id == R.id.share_button || id == R.id.navigation_title_share) {
             MobclickAgent.onEvent(this, UMengKey.NAVIGATION_ACTIVITY_SHARE);
             MiscUtil.shareApp(this);
             //        } else if (id == R.id.navigation_rank_center) {
