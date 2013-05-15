@@ -13,12 +13,15 @@
         android:visibility="gone" />
 
     <TextView
-        android:layout_width="wrap_content"
+        style="@style/PreferenceWindowTitleText"
+        android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:paddingLeft="5dip"
-        android:text="@string/app_name"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:background="@null"
+        android:fadingEdge="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dip"
+        android:text="@string/app_name" />
 
     <ImageView
         android:id="@+id/navigation_title_share"
