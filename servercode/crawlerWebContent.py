@@ -301,7 +301,7 @@ def fetchImage(index, waplink):
     soup = bs(page.read())
     outpath = "{0}.jpg".format(index)
     for img in soup.findAll('img', {"class" : "card-image editorImg log-set-param"}):
-#         urlretrieve(img["src"], outpath)
+		urlretrieve(img["src"], outpath)
     
 def listInfo(dirp):
 	infos = []
@@ -321,7 +321,16 @@ def listInfo(dirp):
 	return infos
 	
 if __name__ == '__main__':
-   	
+# 	cpath = "E:\\j2se_workspace\\PicProject\\mpic--test-2013\\client\\girls3\\assets\\langs\\zh-CN\\165.html"
+# 	fin = open(cpath, 'r')
+# 	cpath1 = "E:\\j2se_workspace\\PicProject\\mpic--test-2013\\client\\girls3\\assets\\langs\\zh-CN\\165.html-1"
+# 	fout = open(cpath1, 'w')
+# 	soup = bs(fin)
+#    	html = filter_tags(soup.prettify(formatter="html"))
+# 	fin.close()
+# 	fout.write(html)
+# 	fout.close()
+# 	sys.exit(0)
 #    	sl = "羽田桃子（はねだももこ），日本av女优，　2010年10月出道。"
 #    	print filter_space(sl)
 #    	sys.exit(0)
