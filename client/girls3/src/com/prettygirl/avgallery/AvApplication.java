@@ -28,6 +28,7 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.prettygirl.avgallery.model.AVGirl;
 import com.prettygirl.avgallery.util.AlbumCacheFileNameGenerator;
 import com.prettygirl.avgallery.util.MUnlimitedDiscCache;
+import com.prettygirl.avgallery.util.PreferenceUtils;
 import com.prettygirl.avgallery.util.StorageUtils;
 
 public class AvApplication extends Application {
@@ -133,6 +134,7 @@ public class AvApplication extends Application {
                 .imageDownloader(new BaseImageDownloader(this)).tasksProcessingOrder(QueueProcessingType.LIFO)
                 .defaultDisplayImageOptions(options).build();
         ImageLoader.getInstance().init(config);
+        PreferenceUtils.init(this);
     }
 
     public static String getCacheImageUrl(String url) {

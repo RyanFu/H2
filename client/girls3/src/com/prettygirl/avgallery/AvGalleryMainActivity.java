@@ -17,12 +17,11 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.prettygirl.app.base.BaseActivity;
 import com.prettygirl.avgallery.dialog.ExitDialog;
 import com.prettygirl.avgallery.model.AVGirl;
 import com.prettygirl.avgallery1.R;
 
-public class AvGalleryMainActivity extends BaseActivity {
+public class AvGalleryMainActivity extends MBaseActivity {
 
     public static final String EXT_KEY_GIRL = "ext_key_girl";
 
@@ -51,6 +50,12 @@ public class AvGalleryMainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        tryShowOnlineConfigAd();
     }
 
     @Override

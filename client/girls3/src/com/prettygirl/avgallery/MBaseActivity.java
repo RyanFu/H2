@@ -1,0 +1,108 @@
+package com.prettygirl.avgallery;
+
+import org.json.JSONObject;
+
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
+import android.text.format.DateUtils;
+import android.view.View;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.prettygirl.app.base.BaseActivity;
+import com.prettygirl.app.utils.DialogToastUtils;
+import com.prettygirl.avgallery.util.PreferenceUtils;
+import com.prettygirl.avgallery.util.UMengKey;
+import com.prettygirl.avgallery1.R;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.analytics.onlineconfig.UmengOnlineConfigureListener;
+
+public class MBaseActivity extends BaseActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MobclickAgent.updateOnlineConfig(this);
+        MobclickAgent.setOnlineConfigureListener(new UmengOnlineConfigureListener() {
+            @Override
+            public void onDataReceived(JSONObject data) {
+                parseOnlineConfig(data);
+            }
+        });
+    }
+
+    private Handler mHandler = new Handler();
+
+    protected void parseOnlineConfig(JSONObject data) {
+        if (data != null) {
+            mHandler.post(new Runnable() {
+
+                @Override
+                public void run() {
+                    showOnlineAdDialog();
+                }
+
+            });
+        }
+    }
+
+    private void showOnlineAdDialog() {
+        String value = MobclickAgent.getConfigParams(this, UMengKey.ONLINE_CONFIG_KEY_AD_DIALOG_SHOWABLE);
+        if (TextUtils.isEmpty(value) || !Boolean.valueOf(value)) {
+            return;
+        } else {
+            final String title = MobclickAgent.getConfigParams(this, UMengKey.ONLINE_CONFIG_KEY_AD_DIALOG_TITLE);
+            final String msg = MobclickAgent.getConfigParams(this, UMengKey.ONLINE_CONFIG_KEY_AD_DIALOG_CONTENT);
+            value = MobclickAgent.getConfigParams(this, UMengKey.ONLINE_CONFIG_KEY_AD_DIALOG_HAS_IMAGE);
+            final String okUrl = MobclickAgent.getConfigParams(this, UMengKey.ONLINE_CONFIG_KEY_AD_DIALOG_BUTTON_YES);
+            String imgUrl = null;
+            if (!TextUtils.isEmpty(value) && Boolean.valueOf(value)) {
+                imgUrl = MobclickAgent.getConfigParams(this, UMengKey.ONLINE_CONFIG_KEY_AD_DIALOG_IMAGE_URL);
+                ImageLoader.getInstance().loadImage(imgUrl, new ImageLoadingListener() {
+
+                    @Override
+                    public void onLoadingStarted(String imageUri, View view) {
+                    }
+
+                    @Override
+                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                    }
+
+                    @Override
+                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                        DialogToastUtils.showAdUpdateDialogImage(MBaseActivity.this, title, msg, loadedImage,
+                                getString(R.string.ok), okUrl, getString(R.string.e_gallery_detail_image_cancel));
+                        PreferenceUtils.setLong(PreferenceUtils.KEY_LAST_SHOW_AD_DIALOG_DATA,
+                                System.currentTimeMillis());
+                    }
+
+                    @Override
+                    public void onLoadingCancelled(String imageUri, View view) {
+                    }
+                });
+            } else {
+                DialogToastUtils.showAdUpdateDialogImage(MBaseActivity.this, title, msg, null, getString(R.string.ok),
+                        okUrl, getString(R.string.e_gallery_detail_image_cancel));
+                PreferenceUtils.setLong(PreferenceUtils.KEY_LAST_SHOW_AD_DIALOG_DATA, System.currentTimeMillis());
+            }
+        }
+    }
+
+    protected void tryShowOnlineConfigAd() {
+        long lastTime = PreferenceUtils.getLong(PreferenceUtils.KEY_LAST_SHOW_AD_DIALOG_DATA, -1);
+        if (lastTime == -1) {
+            return;
+        }
+        String value = MobclickAgent.getConfigParams(this, UMengKey.ONLINE_CONFIG_KEY_AD_DIALOG_SHOW_INTERVAL);
+        if (TextUtils.isEmpty(value)) {
+            return;
+        }
+        if (System.currentTimeMillis() - lastTime > DateUtils.DAY_IN_MILLIS * Integer.valueOf(value)) {
+            showOnlineAdDialog();
+        }
+    }
+
+}
