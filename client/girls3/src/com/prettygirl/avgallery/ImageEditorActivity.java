@@ -100,7 +100,7 @@ public class ImageEditorActivity extends BaseActivity implements OnClickListener
         } else if (id == R.id.picture_zoom_in) {
             mMainImageView.postZoomBy(0.8f);
         } else if (id == R.id.picture_zoom_out) {
-            mMainImageView.postZoomBy(.2f);
+            mMainImageView.postZoomBy(1.2f);
         } else if (id == R.id.button1) {
             finish();
         } else if (id == R.id.button2 || id == R.id.picture_widget_save) {
