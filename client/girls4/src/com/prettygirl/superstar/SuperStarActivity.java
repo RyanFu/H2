@@ -28,6 +28,7 @@ public class SuperStarActivity extends MBaseActivity implements ILoadListener {
     private ArrayList<SuperStar> mGirls;
 
     private View mProgressView;
+
     private View mFailedPanelView;
 
     private GridView mGridView;

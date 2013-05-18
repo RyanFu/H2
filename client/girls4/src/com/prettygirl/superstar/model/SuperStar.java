@@ -5,13 +5,13 @@ import android.os.Parcelable;
 
 public final class SuperStar implements Parcelable {
 
-    public String id;
+    public int id;
 
     public String name;
 
     public String subTitle;
 
-    public SuperStar(String id, String name, String subTitle) {
+    public SuperStar(int id, String name, String subTitle) {
         this.id = id;
         this.name = name;
         this.subTitle = subTitle;
@@ -23,7 +23,7 @@ public final class SuperStar implements Parcelable {
     }
 
     public void writeToParcel(Parcel out, int flags) {
-        out.writeString(this.id);
+        out.writeInt(this.id);
         out.writeString(this.name);
         out.writeString(this.subTitle);
     }
@@ -39,7 +39,7 @@ public final class SuperStar implements Parcelable {
     };
 
     private SuperStar(Parcel in) {
-        this.id = in.readString();
+        this.id = in.readInt();
         this.name = in.readString();
         this.subTitle = in.readString();
     }

@@ -52,7 +52,7 @@ public class StorageUtils {
 
     public interface ILoadListener {
 
-        public enum Status {
+        public static enum Status {
             Successed, Failed
         }
 
@@ -61,7 +61,38 @@ public class StorageUtils {
         void loadFinished(Status status, Object obj);
     }
 
+    public static final void loadGrilPics(final Context context, final int picId, final ILoadListener iLoadListener) {
+        iLoadListener.startLoad();
+        AsyncTask<Void, Void, Void> loadTask = new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                Http http = new Http(context);
+                // http://106.187.48.40/girl/info
+                String url = ServerUtils.getPicServerRoot(context) + "/girl/" + picId + "/n";
+                int n = -1;
+                for (int index = 0; index < 3; index++) {
+                    String result = http.get(url);
+                    if (result != null) {
+                        try {
+                            n = Integer.valueOf(result);
+                            iLoadListener.loadFinished(ILoadListener.Status.Successed, n);
+                            return null;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                iLoadListener.loadFinished(ILoadListener.Status.Failed, n);
+                return null;
+            }
+
+        };
+        loadTask.execute();
+    }
+
     public static final void loadGrils(final Context context, final ILoadListener iLoadListener) {
+        iLoadListener.startLoad();
         AsyncTask<Void, Void, Void> loadTask = new AsyncTask<Void, Void, Void>() {
 
             Handler mHandler = new Handler(Looper.myLooper()) {
@@ -104,7 +135,7 @@ public class StorageUtils {
                         }
                         StringTokenizer tokens = new StringTokenizer(s, "@@@");
 
-                        String id = tokens.nextToken().trim();
+                        int id = Integer.valueOf(tokens.nextToken().trim());
                         String name = tokens.nextToken().trim();
                         SuperStar girl = new SuperStar(id, name, tokens.nextToken().trim());
                         stars.add(girl);
@@ -154,8 +185,7 @@ public class StorageUtils {
                                 continue;
                             }
                             StringTokenizer tokens = new StringTokenizer(s, "@@@");
-
-                            String id = tokens.nextToken().trim();
+                            int id = Integer.valueOf(tokens.nextToken().trim());
                             String name = tokens.nextToken().trim();
                             SuperStar girl = new SuperStar(id, name, tokens.nextToken().trim());
                             stars.add(girl);
