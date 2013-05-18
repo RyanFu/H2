@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.TextView;
 
 import com.prettygirl.app.base.BaseActivity;
 import com.prettygirl.app.utils.ServerUtils;
@@ -27,7 +28,7 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
     private View mContexts;
 
     private int mId;
-    
+
     private String mName = null;
 
     private View mFailedPanelView;
@@ -57,6 +58,15 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
             return;
         }
         setTitle(mName = intent.getStringExtra(EXT_IMAGE_NAME));
+        ((TextView) findViewById(R.id.custom_entry_title)).setText(mName);
+        findViewById(R.id.custom_entry_title).setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+
+        });
         StorageUtils.loadGrilPics(this, id, this);
         mId = id;
 
