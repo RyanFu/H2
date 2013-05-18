@@ -20,6 +20,7 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
     private GalleryDetailView mContextView;
 
     private View mProgressView;
+    private View mContexts;
 
     private int mId;
 
@@ -31,14 +32,16 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.e_gallery_detail);
-        Intent intent = getIntent();
         mProgressView = findViewById(R.id.loadingPanel);
+        mContexts = findViewById(R.id.tgallery_p);
         mFailedPanelView = findViewById(R.id.failedPanel);
+        mContextView = (GalleryDetailView) findViewById(R.id.tgallery);
+        mContextView.bindActivity(this);
+
+        Intent intent = getIntent();
         int id = intent.getIntExtra(EXT_IMAGE_INDEX, 0);
         StorageUtils.loadGrilPics(this, id, this);
         mId = id;
-        mContextView = (GalleryDetailView) findViewById(R.id.tgallery);
-        mContextView.bindActivity(this);
     }
 
     @Override
@@ -60,7 +63,8 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
     @Override
     public void startLoad() {
         mProgressView.setVisibility(View.VISIBLE);
-        mContextView.setVisibility(View.GONE);
+        mContexts.setVisibility(View.GONE);
+        mFailedPanelView.setVisibility(View.GONE);
     }
 
     @Override
@@ -69,15 +73,15 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
         if (obj == null || !(obj instanceof Integer)) {
             n = -1;
         } else {
-            n = -1;
+            n = ((Integer) obj).intValue();
         }
         if (status == Status.Failed || n == -1) {
             mProgressView.setVisibility(View.GONE);
-            mContextView.setVisibility(View.GONE);
+            mContexts.setVisibility(View.GONE);
             mFailedPanelView.setVisibility(View.VISIBLE);
         } else {
             mProgressView.setVisibility(View.GONE);
-            mContextView.setVisibility(View.VISIBLE);
+            mContexts.setVisibility(View.VISIBLE);
             mFailedPanelView.setVisibility(View.GONE);
             urls = new ArrayList<String>();
             for (int i = 0; i < n; i++) {

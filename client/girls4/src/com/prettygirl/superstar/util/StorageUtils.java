@@ -65,25 +65,43 @@ public class StorageUtils {
         iLoadListener.startLoad();
         AsyncTask<Void, Void, Void> loadTask = new AsyncTask<Void, Void, Void>() {
 
+            Handler mHandler = new Handler(Looper.myLooper()) {
+
+                @Override
+                public void handleMessage(Message msg) {
+                    ILoadListener.Status xStatus = ILoadListener.Status.Successed;
+                    if (msg.arg1 == 0) {
+                        xStatus = ILoadListener.Status.Failed;
+                    }
+                    iLoadListener.loadFinished(xStatus, msg.arg2);
+                }
+
+            };
+
             @Override
             protected Void doInBackground(Void... params) {
                 Http http = new Http(context);
                 // http://106.187.48.40/girl/info
                 String url = ServerUtils.getPicServerRoot(context) + "/girl/" + picId + "/n";
                 int n = -1;
+                Message msg = mHandler.obtainMessage();
                 for (int index = 0; index < 3; index++) {
                     String result = http.get(url);
                     if (result != null) {
                         try {
                             n = Integer.valueOf(result);
-                            iLoadListener.loadFinished(ILoadListener.Status.Successed, n);
+                            msg.arg1 = 1;
+                            msg.arg2 = n;
+                            msg.sendToTarget();
                             return null;
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }
-                iLoadListener.loadFinished(ILoadListener.Status.Failed, n);
+                msg.arg1 = 0;
+                msg.arg2 = n;
+                msg.sendToTarget();
                 return null;
             }
 

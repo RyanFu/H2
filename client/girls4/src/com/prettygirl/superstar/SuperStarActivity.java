@@ -41,9 +41,9 @@ public class SuperStarActivity extends MBaseActivity implements ILoadListener {
         setContentView(R.layout.super_gallery_main_activity);
         mProgressView = findViewById(R.id.loadingPanel);
         mFailedPanelView = findViewById(R.id.failedPanel);
+        mGridView = (GridView) findViewById(R.id.av_gallery_grid_view);
         StorageUtils.loadGrils(this, this);
         mProgressView.setVisibility(View.VISIBLE);
-        mGridView = (GridView) findViewById(R.id.av_gallery_grid_view);
         mGridView.setAdapter(mSuperStarAdapter = new SuperStarAdapter());
         mGridView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -51,7 +51,7 @@ public class SuperStarActivity extends MBaseActivity implements ILoadListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClass(SuperStarActivity.this, GalleryDetailActivity.class);
-                intent.putExtra(GalleryDetailActivity.EXT_IMAGE_INDEX, mGirls.get(position));
+                intent.putExtra(GalleryDetailActivity.EXT_IMAGE_INDEX, mGirls.get(position).id);
                 startActivity(intent);
             }
 

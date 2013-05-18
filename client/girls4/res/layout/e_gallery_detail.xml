@@ -5,6 +5,7 @@
 
     <LinearLayout
         style="@style/fillall"
+        android:id="@+id/tgallery_p"
         android:orientation="vertical" >
 
         <com.prettygirl.superstar.components.GalleryDetailView
