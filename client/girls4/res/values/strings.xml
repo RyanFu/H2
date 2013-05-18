@@ -11,6 +11,7 @@
     <string name="e_gallery_detail_image_save_fail_msg">保存失败</string>
     <string name="e_gallery_detail_image_save_success_msg">保存成功：%s</string>
     <string name="e_gallery_detail_image_save">保存</string>
+    <string name="personal_info">个人信息</string>
     <string name="ok">确定</string>
     <string name="e_gallery_detail_image_cancel">取消</string>
     <string name="share_title">分享</string>

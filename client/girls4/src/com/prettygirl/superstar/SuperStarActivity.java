@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,13 +18,16 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.prettygirl.app.utils.AdUtils;
 import com.prettygirl.app.utils.ServerUtils;
 import com.prettygirl.superstar.dialog.ExitDialog;
 import com.prettygirl.superstar.model.SuperStar;
 import com.prettygirl.superstar.util.StorageUtils;
 import com.prettygirl.superstar.util.StorageUtils.ILoadListener;
+import com.prettygirl.superstar.util.UMengKey;
+import com.umeng.analytics.MobclickAgent;
 
-public class SuperStarActivity extends MBaseActivity implements ILoadListener {
+public class SuperStarActivity extends MBaseActivity implements ILoadListener, OnClickListener {
 
     private ArrayList<SuperStar> mGirls;
 
@@ -46,6 +50,7 @@ public class SuperStarActivity extends MBaseActivity implements ILoadListener {
         mProgressView.setVisibility(View.VISIBLE);
         setTitle(R.string.app_name);
         setGoBackIconVisibility(View.GONE);
+        setAdViewClickListener(this);
         mGridView.setAdapter(mSuperStarAdapter = new SuperStarAdapter());
         mGridView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -188,6 +193,15 @@ public class SuperStarActivity extends MBaseActivity implements ILoadListener {
             mFailedPanelView.setVisibility(View.GONE);
             mGirls = cGirls;
             mSuperStarAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int vid = v.getId();
+        if (vid == R.id.entry_point_ad_icon) {
+            MobclickAgent.onEvent(this, UMengKey.ENTRY_POINT_ACTIVITY_AD);
+            AdUtils.handleMoreAppEvent(this);
         }
     }
 

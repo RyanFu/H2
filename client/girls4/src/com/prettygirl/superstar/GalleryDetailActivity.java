@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
 
 import com.prettygirl.app.base.BaseActivity;
 import com.prettygirl.app.utils.ServerUtils;
@@ -14,7 +16,7 @@ import com.prettygirl.superstar.util.PreferenceUtils;
 import com.prettygirl.superstar.util.StorageUtils;
 import com.prettygirl.superstar.util.StorageUtils.ILoadListener;
 
-public class GalleryDetailActivity extends BaseActivity implements ILoadListener {
+public class GalleryDetailActivity extends BaseActivity implements ILoadListener, OnClickListener {
 
     public static final String EXT_IMAGE_INDEX = "ext_image_index";
 
@@ -33,15 +35,23 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.e_gallery_detail);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_entry_point_title);
         mProgressView = findViewById(R.id.loadingPanel);
         mContexts = findViewById(R.id.tgallery_p);
         mFailedPanelView = findViewById(R.id.failedPanel);
         mContextView = (GalleryDetailView) findViewById(R.id.tgallery);
         mContextView.bindActivity(this);
 
+        findViewById(R.id.button1).setOnClickListener(this);
+        findViewById(R.id.button2).setOnClickListener(this);
         Intent intent = getIntent();
-        int id = intent.getIntExtra(EXT_IMAGE_INDEX, 0);
+        int id = intent.getIntExtra(EXT_IMAGE_INDEX, -1);
+        if (id == -1) {
+            finish();
+            return;
+        }
         setTitle(intent.getStringExtra(EXT_IMAGE_NAME));
         StorageUtils.loadGrilPics(this, id, this);
         mId = id;
@@ -99,6 +109,22 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
             }
             PreferenceUtils.setInt(PreferenceUtils.KEY_GIRL_PIC_NUM + mId, n);
             mContextView.update(urls);
+        }
+    }
+
+    private void retry() {
+        StorageUtils.loadGrilPics(this, mId, this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.button1) {
+            retry();
+        } else if (id == R.id.button2) {
+            Intent intent = null;
+            intent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+            startActivity(intent);
         }
     }
 }
