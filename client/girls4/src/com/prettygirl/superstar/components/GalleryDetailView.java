@@ -82,6 +82,11 @@ public class GalleryDetailView extends JazzyViewPager {
         this.setCurrentItem(index);
     }
 
+    public void update(ArrayList<String> imgList) {
+        mUrls = imgList;
+        mPagerAdapter.notifyDataSetChanged();
+    }
+
     class MPagerAdapter extends PagerAdapter {
 
         @Override

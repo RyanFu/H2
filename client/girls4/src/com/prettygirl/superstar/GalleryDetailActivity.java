@@ -10,6 +10,7 @@ import android.view.View;
 import com.prettygirl.app.base.BaseActivity;
 import com.prettygirl.app.utils.ServerUtils;
 import com.prettygirl.superstar.components.GalleryDetailView;
+import com.prettygirl.superstar.util.PreferenceUtils;
 import com.prettygirl.superstar.util.StorageUtils;
 import com.prettygirl.superstar.util.StorageUtils.ILoadListener;
 
@@ -42,6 +43,13 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
         int id = intent.getIntExtra(EXT_IMAGE_INDEX, 0);
         StorageUtils.loadGrilPics(this, id, this);
         mId = id;
+
+        int count = PreferenceUtils.getInt(PreferenceUtils.KEY_GIRL_PIC_NUM + mId, 0);
+        urls = new ArrayList<String>();
+        for (int i = 0; i < count; i++) {
+            urls.add(String.format("%s/girl/%s/%s.jpg", ServerUtils.getPicServerRoot(this), mId, i));
+        }
+        mContextView.init(urls, 0);
     }
 
     @Override
@@ -87,7 +95,8 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
             for (int i = 0; i < n; i++) {
                 urls.add(String.format("%s/girl/%s/%s.jpg", ServerUtils.getPicServerRoot(this), mId, i));
             }
-            mContextView.init(urls, 0);
+            PreferenceUtils.setInt(PreferenceUtils.KEY_GIRL_PIC_NUM + mId, n);
+            mContextView.update(urls);
         }
     }
 }
