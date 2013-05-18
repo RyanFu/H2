@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <com.prettygirl.avgallery.components.ScrollerView
+        android:id="@+id/scrollerView"
+        android:layout_width="match_parent"
+        android:layout_height="150dip"
+        android:visibility="gone" />
+
+    <WebView
+        android:id="@+id/main_container_web_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+    </WebView>
+
+    <include layout="@layout/e_admob" />
+
+</LinearLayout>

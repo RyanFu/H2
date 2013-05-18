@@ -1,0 +1,6 @@
+<resources>
+
+    <drawable name="av_gallery_main_grid_item_normal">#00ffffff</drawable>
+    <drawable name="av_gallery_main_grid_item_pressed">#55619537</drawable>
+
+</resources>
