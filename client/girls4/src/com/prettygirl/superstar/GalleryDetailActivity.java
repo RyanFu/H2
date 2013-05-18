@@ -27,6 +27,8 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
     private View mContexts;
 
     private int mId;
+    
+    private String mName = null;
 
     private View mFailedPanelView;
 
@@ -44,6 +46,8 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
         mContextView = (GalleryDetailView) findViewById(R.id.tgallery);
         mContextView.bindActivity(this);
 
+        findViewById(R.id.personal_info).setOnClickListener(this);
+
         findViewById(R.id.button1).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
         Intent intent = getIntent();
@@ -52,7 +56,7 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
             finish();
             return;
         }
-        setTitle(intent.getStringExtra(EXT_IMAGE_NAME));
+        setTitle(mName = intent.getStringExtra(EXT_IMAGE_NAME));
         StorageUtils.loadGrilPics(this, id, this);
         mId = id;
 
@@ -121,9 +125,14 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
         int id = v.getId();
         if (id == R.id.button1) {
             retry();
+        } else if (id == R.id.personal_info) {
+            Intent intent = new Intent();
+            intent.setClass(this, PersonalInfoActivity.class);
+            intent.putExtra(EXT_IMAGE_INDEX, mId);
+            intent.putExtra(EXT_IMAGE_NAME, mName);
+            startActivity(intent);
         } else if (id == R.id.button2) {
-            Intent intent = null;
-            intent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+            Intent intent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
             startActivity(intent);
         }
     }
