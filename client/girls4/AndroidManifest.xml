@@ -9,10 +9,18 @@
         android:targetSdkVersion="17" />
 
     <application
+        android:name="com.prettygirl.superstar.SuperStarApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" android:name="SuperStarApplication">
+        android:theme="@style/MActivity" >
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="518f8a6356240bb21c01c473" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="gplay" />
+
         <activity
             android:name="com.prettygirl.superstar.SuperStarActivity"
             android:label="@string/app_name" >
@@ -21,6 +29,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.prettygirl.superstar.GalleryDetailActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.prettygirl.superstar.ImageEditorActivity"
+            android:label="@string/app_name" >
         </activity>
     </application>
 

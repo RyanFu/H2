@@ -1,19 +1,32 @@
 package com.prettygirl.superstar.util;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.View;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.prettygirl.app.utils.DialogToastUtils;
+import com.prettygirl.app.utils.Http;
+import com.prettygirl.app.utils.ServerUtils;
 import com.prettygirl.superstar.R;
+import com.prettygirl.superstar.model.SuperStar;
 
 public class StorageUtils {
 
@@ -27,12 +40,141 @@ public class StorageUtils {
 
     private static final String SAVE_PATH = Environment.getExternalStorageDirectory().getPath() + "/superstar_%s.jpg";
 
+    private static final String GIRLS_ASSET_PATH = "info";
+
     public final static String getImageCacheDir() {
         return CACHE_DIR_SDCARD;
     }
 
     public static boolean isSdCardAvailable() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
+
+    public interface ILoadListener {
+
+        public enum Status {
+            Successed, Failed
+        }
+
+        void startLoad();
+
+        void loadFinished(Status status, Object obj);
+    }
+
+    public static final void loadGrils(final Context context, final ILoadListener iLoadListener) {
+        AsyncTask<Void, Void, Void> loadTask = new AsyncTask<Void, Void, Void>() {
+
+            Handler mHandler = new Handler(Looper.myLooper()) {
+
+                @Override
+                public void handleMessage(Message msg) {
+                    ILoadListener.Status xStatus = ILoadListener.Status.Successed;
+                    if (msg.arg1 == 0) {
+                        xStatus = ILoadListener.Status.Failed;
+                    }
+                    iLoadListener.loadFinished(xStatus, msg.obj);
+                }
+
+            };
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                String path = PreferenceUtils.getString(PreferenceUtils.KEY_LATEST_GIRLS_PATH, null);
+                Message msg = mHandler.obtainMessage();
+                try {
+                    BufferedReader bufferedReader = null;
+                    InputStreamReader inputStreamReader = null;
+                    InputStream inputStream = null;
+                    if (path == null) { // asset
+                        bufferedReader = new BufferedReader(inputStreamReader = new InputStreamReader(
+                                inputStream = context.getAssets().open(GIRLS_ASSET_PATH)));
+                    } else {
+                        bufferedReader = new BufferedReader(inputStreamReader = new InputStreamReader(
+                                inputStream = new FileInputStream(path)));
+                    }
+                    ArrayList<SuperStar> stars = new ArrayList<SuperStar>();
+                    while (true) {
+                        String s = bufferedReader.readLine();
+                        if (s == null) {
+                            break;
+                        }
+                        s = s.trim();
+                        if (s.length() == 0) {
+                            continue;
+                        }
+                        StringTokenizer tokens = new StringTokenizer(s, "@@@");
+
+                        String id = tokens.nextToken().trim();
+                        String name = tokens.nextToken().trim();
+                        SuperStar girl = new SuperStar(id, name, tokens.nextToken().trim());
+                        stars.add(girl);
+                    }
+                    msg.arg1 = 1;
+                    msg.obj = stars;
+                    msg.sendToTarget();
+                    bufferedReader.close();
+                    inputStreamReader.close();
+                    inputStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    msg.arg1 = 0;
+                    msg.obj = null;
+                    msg.sendToTarget();
+                }
+                return null;
+            }
+
+        };
+        loadTask.execute();
+    }
+
+    public static final void updateGirls(final Context context, final String name) {
+        AsyncTask<Void, Void, Void> loadTask = new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                Http http = new Http(context);
+                // http://106.187.48.40/girl/info
+                String url = ServerUtils.getPicServerRoot(context) + "/girl/info";
+                boolean result = http.get(url, new File(name));
+                if (result == true) {
+                    try {
+                        InputStreamReader inputStreamReader = null;
+                        InputStream inputStream = null;
+                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader = new InputStreamReader(
+                                inputStream = new FileInputStream(name)));
+                        ArrayList<SuperStar> stars = new ArrayList<SuperStar>();
+                        while (true) {
+                            String s = bufferedReader.readLine();
+                            if (s == null) {
+                                break;
+                            }
+                            s = s.trim();
+                            if (s.length() == 0) {
+                                continue;
+                            }
+                            StringTokenizer tokens = new StringTokenizer(s, "@@@");
+
+                            String id = tokens.nextToken().trim();
+                            String name = tokens.nextToken().trim();
+                            SuperStar girl = new SuperStar(id, name, tokens.nextToken().trim());
+                            stars.add(girl);
+                        }
+                        if (stars.size() > 0) {
+                            PreferenceUtils.setString(PreferenceUtils.KEY_LATEST_GIRLS_PATH, name);
+                        }
+                        bufferedReader.close();
+                        inputStreamReader.close();
+                        inputStream.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                return null;
+            }
+
+        };
+        loadTask.execute();
     }
 
     public static void saveImage(final Context context, String url) {
