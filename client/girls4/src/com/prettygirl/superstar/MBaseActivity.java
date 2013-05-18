@@ -15,7 +15,7 @@ import android.view.View;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
-import com.prettygirl.app.base.BaseActivity;
+import com.prettygirl.app.base.AdTitleBaseActivity;
 import com.prettygirl.app.dialog.AlertDialog;
 import com.prettygirl.app.utils.DialogToastUtils;
 import com.prettygirl.superstar.util.PreferenceUtils;
@@ -23,7 +23,7 @@ import com.prettygirl.superstar.util.UMengKey;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.analytics.onlineconfig.UmengOnlineConfigureListener;
 
-public class MBaseActivity extends BaseActivity {
+public class MBaseActivity extends AdTitleBaseActivity {
 
     private boolean isShowing = false;
 

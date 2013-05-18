@@ -18,6 +18,7 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
 
     public static final String EXT_IMAGE_INDEX = "ext_image_index";
 
+    public static final String EXT_IMAGE_NAME = "ext_image_name";
     private GalleryDetailView mContextView;
 
     private View mProgressView;
@@ -41,6 +42,7 @@ public class GalleryDetailActivity extends BaseActivity implements ILoadListener
 
         Intent intent = getIntent();
         int id = intent.getIntExtra(EXT_IMAGE_INDEX, 0);
+        setTitle(intent.getStringExtra(EXT_IMAGE_NAME));
         StorageUtils.loadGrilPics(this, id, this);
         mId = id;
 

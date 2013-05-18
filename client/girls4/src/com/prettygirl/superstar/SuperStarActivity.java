@@ -44,6 +44,8 @@ public class SuperStarActivity extends MBaseActivity implements ILoadListener {
         mGridView = (GridView) findViewById(R.id.av_gallery_grid_view);
         StorageUtils.loadGrils(this, this);
         mProgressView.setVisibility(View.VISIBLE);
+        setTitle(R.string.app_name);
+        setGoBackIconVisibility(View.GONE);
         mGridView.setAdapter(mSuperStarAdapter = new SuperStarAdapter());
         mGridView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -51,7 +53,9 @@ public class SuperStarActivity extends MBaseActivity implements ILoadListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClass(SuperStarActivity.this, GalleryDetailActivity.class);
-                intent.putExtra(GalleryDetailActivity.EXT_IMAGE_INDEX, mGirls.get(position).id);
+                SuperStar girl = mGirls.get(position);
+                intent.putExtra(GalleryDetailActivity.EXT_IMAGE_INDEX, girl.id);
+                intent.putExtra(GalleryDetailActivity.EXT_IMAGE_NAME, girl.name);
                 startActivity(intent);
             }
 
