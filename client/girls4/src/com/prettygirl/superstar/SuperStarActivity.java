@@ -17,26 +17,43 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.prettygirl.app.utils.ServerUtils;
 import com.prettygirl.superstar.dialog.ExitDialog;
 import com.prettygirl.superstar.model.SuperStar;
+import com.prettygirl.superstar.util.StorageUtils;
+import com.prettygirl.superstar.util.StorageUtils.ILoadListener;
 
-public class SuperStarActivity extends MBaseActivity {
+public class SuperStarActivity extends MBaseActivity implements ILoadListener {
 
     private ArrayList<SuperStar> mGirls;
+
+    private View mProgressView;
+    private View mFailedPanelView;
+
+    private GridView mGridView;
+
+    private SuperStarAdapter mSuperStarAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.super_gallery_main_activity);
-        GridView mGridView = (GridView) findViewById(R.id.av_gallery_grid_view);
-        mGridView.setAdapter(new SuperStarAdapter());
+        mProgressView = findViewById(R.id.loadingPanel);
+        mFailedPanelView = findViewById(R.id.failedPanel);
+        StorageUtils.loadGrils(this, this);
+        mProgressView.setVisibility(View.VISIBLE);
+        mGridView = (GridView) findViewById(R.id.av_gallery_grid_view);
+        mGridView.setAdapter(mSuperStarAdapter = new SuperStarAdapter());
         mGridView.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
+                intent.setClass(SuperStarActivity.this, GalleryDetailActivity.class);
+                intent.putExtra(GalleryDetailActivity.EXT_IMAGE_INDEX, mGirls.get(position));
                 startActivity(intent);
             }
+
         });
     }
 
@@ -97,7 +114,9 @@ public class SuperStarActivity extends MBaseActivity {
             }
             SuperStar girl = mGirls.get(position);
             ImageLoader.getInstance().cancelDisplayTask(cViewHolder.imageView);
-            ImageLoader.getInstance().displayImage("assets://icons/" + girl.id + ".jpg", cViewHolder.imageView);
+            ImageLoader.getInstance().displayImage(
+                    String.format("%s/girl/%s/i.jpg", ServerUtils.getPicServerRoot(SuperStarActivity.this), girl.id),
+                    cViewHolder.imageView);
             cViewHolder.mNameView.setText(girl.name);
             cViewHolder.mSubView.setText(girl.subTitle);
             return convertView;
@@ -133,6 +152,38 @@ public class SuperStarActivity extends MBaseActivity {
             return 0;
         }
 
+    }
+
+    @Override
+    public void startLoad() {
+        mProgressView.setVisibility(View.VISIBLE);
+        mGridView.setVisibility(View.GONE);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void loadFinished(Status status, Object obj) {
+        ArrayList<SuperStar> cGirls = null;
+        if (obj == null || !(obj instanceof ArrayList<?>)) {
+            cGirls = null;
+        } else {
+            try {
+                cGirls = (ArrayList<SuperStar>) obj;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (status == Status.Failed || cGirls == null) {
+            mProgressView.setVisibility(View.GONE);
+            mGridView.setVisibility(View.GONE);
+            mFailedPanelView.setVisibility(View.VISIBLE);
+        } else {
+            mProgressView.setVisibility(View.GONE);
+            mGridView.setVisibility(View.VISIBLE);
+            mFailedPanelView.setVisibility(View.GONE);
+            mGirls = cGirls;
+            mSuperStarAdapter.notifyDataSetChanged();
+        }
     }
 
 }
