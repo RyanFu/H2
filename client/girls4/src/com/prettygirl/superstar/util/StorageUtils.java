@@ -30,8 +30,10 @@ import com.prettygirl.superstar.model.SuperStar;
 
 public class StorageUtils {
 
+    public static final String CACHE_DIR_SDCARD_ROOT = Environment.getExternalStorageDirectory().getPath()
+            + File.separator + "superstar";
     public static final String CACHE_DIR_SDCARD = Environment.getExternalStorageDirectory().getPath() + File.separator
-            + "superstar";
+            + "superstar/girls";
 
     public static final String CACHE_DIR_ASSETS = "pics/";
 
@@ -115,13 +117,13 @@ public class StorageUtils {
 
     public static final String getLatestDataVersion(Context context) {
         String result = PreferenceUtils.getString(PreferenceUtils.KEY_DATA_VERSION, null);
-        if(result == null) {
-            return DATA_VERSION; 
+        if (result == null) {
+            return DATA_VERSION;
         } else {
             return result;
         }
     }
-    
+
     public static final void loadGrils(final Context context, final ILoadListener iLoadListener) {
         iLoadListener.startLoad();
         AsyncTask<Void, Void, Void> loadTask = new AsyncTask<Void, Void, Void>() {
@@ -203,7 +205,7 @@ public class StorageUtils {
                 Http http = new Http(context);
                 // http://106.187.48.40/girl/info
                 String url = ServerUtils.getPicServerRoot(context) + "/girl/info";
-                String pfile = String.format("%s%s%s", CACHE_DIR_SDCARD, File.separator, name);
+                String pfile = String.format("%s%s%s", CACHE_DIR_SDCARD_ROOT, File.separator, name);
                 boolean result = http.get(url, new File(pfile));
                 if (result == true) {
                     try {
