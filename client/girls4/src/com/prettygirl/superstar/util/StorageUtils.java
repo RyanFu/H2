@@ -175,7 +175,8 @@ public class StorageUtils {
 
                         int id = Integer.valueOf(tokens.nextToken().trim());
                         String name = tokens.nextToken().trim();
-                        SuperStar girl = new SuperStar(id, name, tokens.nextToken().trim());
+                        String desc = tokens.hasMoreTokens() == true ? tokens.nextToken() : name;
+                        SuperStar girl = new SuperStar(id, name, desc);
                         stars.add(girl);
                     }
                     msg.arg1 = 1;
@@ -226,7 +227,8 @@ public class StorageUtils {
                             StringTokenizer tokens = new StringTokenizer(s, "@@@");
                             int id = Integer.valueOf(tokens.nextToken().trim());
                             String name = tokens.nextToken().trim();
-                            SuperStar girl = new SuperStar(id, name, tokens.nextToken().trim());
+                            String desc = tokens.hasMoreTokens() == true ? tokens.nextToken() : name;
+                            SuperStar girl = new SuperStar(id, name, desc);
                             stars.add(girl);
                         }
                         if (stars.size() > 0) {
