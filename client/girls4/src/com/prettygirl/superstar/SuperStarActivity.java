@@ -123,6 +123,7 @@ public class SuperStarActivity extends MBaseActivity implements ILoadListener, O
                 cViewHolder = (ViewHolder) obj;
             }
             SuperStar girl = mGirls.get(position);
+            cViewHolder.imageView.setImageDrawable(null);
             ImageLoader.getInstance().cancelDisplayTask(cViewHolder.imageView);
             ImageLoader.getInstance().displayImage(
                     String.format("%s/girl/%s/i.jpg", ServerUtils.getPicServerRoot(SuperStarActivity.this), girl.id),
