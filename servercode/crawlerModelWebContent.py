@@ -28,9 +28,13 @@ def filter_tags(htmlstr):
 	re_cdata = re.compile('//<!\[CDATA\[[^>]*//\]\]>', re.I)  # 匹配CDATA
 	re_comment = re.compile('<!--[^>]*-->')  # HTML注释
 	re_a = re.compile('</?\s*a[^>]*>')  # HTML a标签
+	re_script = re.compile('</?\s*script[^>]*>')  # HTML script标签
+	re_link = re.compile('</?\s*link[^>]*>')  # HTML script标签
 	blank_line = re.compile('\n+')  # 去掉多余的空行
 	result = re_cdata.sub('', htmlstr)  # 去掉CDATA
 	result = re_a.sub('', result)  # HTML a标签
+	result = re_script.sub('', result)  # HTML a标签
+	result = re_link.sub('', result)  # HTML a标签
 	result = re_comment.sub('', result)  # 去掉HTML注释
 	result = blank_line.sub('', result)
 	return result
@@ -99,8 +103,16 @@ def get_mm_girl_content1(folder, girl):
 	soup.head.script.extract()
 	print soup.head
 	
+def get_img_base64(url):
+	try:
+		urlinfo = urllib2.urlopen(url, None, 3)
+		return base64.b64encode(urlinfo.read())
+	except:
+		return None
+	
 def get_mm_girl_content(folder, girl):
 	"""
+	url = "http://www.mm-girl.com/zhangzhixi-dangan-32462.html"
 	从连接中获取当前模特信息,并保存文件
 	"""
 	page = urllib.urlopen(girl['dangan'])
@@ -111,7 +123,27 @@ def get_mm_girl_content(folder, girl):
 		return
 	else:
 		for mypic in soup.findAll('div', {"class" : "mypic"}):
-			outpath = os.path.join(folder, "{0}.html".format(girl['name']))
+			girl['name-ch'] = mypic.h3.get_text()[0:-4] 	# 明星名字
+			girl['name-des'] = filter_space(filter_tags(mypic.get_text())) # 明星简介
+			for p in mypic.findAll('p'):
+				textp = p.get_text()
+				if len(textp) >= 20:
+					girl['name-des'] = textp
+					break
+			for rdiv in mypic.findAll('div', {"class" : "right"}):
+				rdiv.extract()
+			for script in mypic.findAll('script'):
+				script.extract()
+			for img in mypic.findAll('img'):
+				uri = img['src']
+				for i in range(0, 3 , 1):
+					uri = get_img_base64(uri)
+					if uri != None:
+						break
+				if uri != None:
+					img['src'] = "data:image/png;base64,{0}".format(uri)
+			#outpath = os.path.join(folder, "{0}.html".format(girl['name']))
+			outpath = os.path.join(folder, "i.html")
 			fout = open(outpath, 'w')
 			mhead = soup.head
 			for link in mhead.findAll('link'):
@@ -122,8 +154,9 @@ def get_mm_girl_content(folder, girl):
 			fout.close()
 	time.sleep(0.1)
 	
-def get_mm_girl_model_links(folder, url):
+def get_mm_girl_model_links(folder, index, url):
 	"""
+	url = "http://www.mm-girl.com/girl-star.html"
 	从连接中获取所有模特信息,比如名称, id, 档案连接, 图片连接等
 	并返回该列表
 	"""
@@ -139,17 +172,20 @@ def get_mm_girl_model_links(folder, url):
 			for ul in mypic.findAll('ul'):
 				ss = ul.a['href'][0:-5].split('-')
 				girl = {}
+				girl['index'] = index
 				girl['name'] = ss[1]
 				girl['id'] = ss[2]
 				girl['pic'] = url_pic_format.format(girl['name'], girl['id'])
 				girl['dangan'] = url_dangan_format.format(girl['name'], girl['id'])
-				outpath = os.path.join(folder, girl['id'])
+				#outpath = os.path.join(folder, girl['id'])
+				outpath = os.path.join(folder, "{0}".format(girl['index']))
 				if not os.path.exists(outpath):
 					os.makedirs(outpath, 0777)
 				get_mm_girl_content(outpath, girl)
 				time.sleep(0.1)
-				get_mm_girl_img(outpath, girl)
-				time.sleep(0.1)
+				#get_mm_girl_img(outpath, girl)
+				#time.sleep(0.1)
+				index += 1
 				girls.append(girl)
 	return girls
     
@@ -158,32 +194,37 @@ def get_mm_girl_links(folder):
 	生成连接信息
 	"""
 	girls = []
-	for index in range(1, 93, 1):
+	cindex = 1
+	#for index in range(1, 93, 1):
+	for index in range(1, 3, 1):
 		ch = '-'
 		if index == 92:
 			ch = ''
 			url = url_format.format(ch, '')
 		else:
 			url = url_format.format(ch, index)
-		girls.extend(get_mm_girl_model_links(folder, url))
+		girls.extend(get_mm_girl_model_links(folder, cindex, url))
+		cindex = len(girls) + 1
 	if not os.path.exists(folder):
 		os.makedirs(folder, 0777)
-	outpath = os.path.join(folder, "info")
+	outpath = os.path.join(folder, "info-debug")
 	fout = open(outpath, 'w')
 	fout.writelines(['%s@@@%s@@@%s@@@%s\n' % (girl['name'], girl['id'], girl['pic'], girl['dangan']) for girl in girls])
 	fout.close()
+	outpath = os.path.join(folder, "info")
+	fout = open(outpath, 'w')
+	fout.writelines(['%s@@@%s@@@%s\n' % (girl['index'], girl['name-ch'], girl['name-des']) for girl in girls])
+	fout.close()
 
 if __name__ == '__main__':
-	# get_mm_girl_content("http://www.mm-girl.com/girl-star.html")
-	
 # 	get_mm_girl_img_file('.', "http://www.mm-girl.com/photo-zhangzhixi-v479197.html")
- 	get_mm_girl_links('mm_girl')
+  	get_mm_girl_links('mm_girl')
 	# http://www.mm-girl.com/zhangzhixi-dangan-32462.html
 #  	girl = {}
 #  	girl['name'] = 'zhangzhixi'
 #  	girl['id'] = 32462
 #  	girl['pic'] = url_pic_format.format(girl['name'], girl['id'])
-#   girl['dangan'] = url_dangan_format.format(girl['name'], girl['id'])
-#  	get_mm_girl_content(girl)
+#  	girl['dangan'] = url_dangan_format.format(girl['name'], girl['id'])
+#  	get_mm_girl_content('.', girl)
 #  	get_mm_girl_img('.', girl)
 #  	get_mm_girl_content1('.', girl)
