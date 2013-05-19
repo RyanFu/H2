@@ -34,5 +34,9 @@ public final class UMengKey {
 
     // ------------IMAGE_EDITOR_ACTIVITY------------
     public static final String IMAGE_EDITOR_ACTIVITY_DOWNLOAD = "image_editor_activity_download";
+    
+    // ------------DATA_VERSION------------
+    public static final String SERVER_DATA_VERSION = "server_data_version";
+    public static final String SERVER_DATA_FORMAT_VERSION = "server_data_format_version";
 
 }

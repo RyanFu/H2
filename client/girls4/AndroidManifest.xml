@@ -21,7 +21,7 @@
         android:theme="@style/MActivity" >
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="518f8a6356240bb21c01c473" />
+            android:value="51979a7a56240b0e6906b32a" />
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="gplay" />

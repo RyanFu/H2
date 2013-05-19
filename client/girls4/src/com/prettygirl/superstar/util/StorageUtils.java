@@ -42,6 +42,10 @@ public class StorageUtils {
 
     private static final String GIRLS_ASSET_PATH = "info";
 
+    public static final String DATA_FORMAT_VERSION = "1";
+
+    public static final String DATA_VERSION = "1";
+
     public final static String getImageCacheDir() {
         return CACHE_DIR_SDCARD;
     }
@@ -185,13 +189,14 @@ public class StorageUtils {
                 Http http = new Http(context);
                 // http://106.187.48.40/girl/info
                 String url = ServerUtils.getPicServerRoot(context) + "/girl/info";
-                boolean result = http.get(url, new File(name));
+                String pfile = String.format("%s%s%s", CACHE_DIR_SDCARD, File.separator, name);
+                boolean result = http.get(url, new File(pfile));
                 if (result == true) {
                     try {
                         InputStreamReader inputStreamReader = null;
                         InputStream inputStream = null;
                         BufferedReader bufferedReader = new BufferedReader(inputStreamReader = new InputStreamReader(
-                                inputStream = new FileInputStream(name)));
+                                inputStream = new FileInputStream(pfile)));
                         ArrayList<SuperStar> stars = new ArrayList<SuperStar>();
                         while (true) {
                             String s = bufferedReader.readLine();
@@ -209,12 +214,16 @@ public class StorageUtils {
                             stars.add(girl);
                         }
                         if (stars.size() > 0) {
-                            PreferenceUtils.setString(PreferenceUtils.KEY_LATEST_GIRLS_PATH, name);
+                            PreferenceUtils.setString(PreferenceUtils.KEY_LATEST_GIRLS_PATH, pfile);
                         }
                         bufferedReader.close();
                         inputStreamReader.close();
                         inputStream.close();
                     } catch (Exception e) {
+                        File file = new File(pfile);
+                        if (file.exists()) {
+                            file.delete();
+                        }
                         e.printStackTrace();
                     }
                 }

@@ -19,6 +19,7 @@ import com.prettygirl.app.base.AdTitleBaseActivity;
 import com.prettygirl.app.dialog.AlertDialog;
 import com.prettygirl.app.utils.DialogToastUtils;
 import com.prettygirl.superstar.util.PreferenceUtils;
+import com.prettygirl.superstar.util.StorageUtils;
 import com.prettygirl.superstar.util.UMengKey;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.analytics.onlineconfig.UmengOnlineConfigureListener;
@@ -35,6 +36,13 @@ public class MBaseActivity extends AdTitleBaseActivity {
             @Override
             public void onDataReceived(JSONObject data) {
                 parseOnlineConfig(data);
+                String value = MobclickAgent.getConfigParams(MBaseActivity.this, UMengKey.SERVER_DATA_FORMAT_VERSION);
+                if (StorageUtils.DATA_FORMAT_VERSION.equals(value)) {
+                    value = MobclickAgent.getConfigParams(MBaseActivity.this, UMengKey.SERVER_DATA_VERSION);
+                    if (!StorageUtils.DATA_VERSION.equals(value)) {
+                        StorageUtils.updateGirls(MBaseActivity.this, value);
+                    }
+                }
             }
         });
     }
