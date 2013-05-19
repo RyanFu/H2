@@ -2,7 +2,6 @@ package com.prettygirl.superstar;
 
 import org.json.JSONObject;
 
-import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
@@ -19,7 +18,6 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.prettygirl.app.base.AdTitleBaseActivity;
 import com.prettygirl.app.dialog.AlertDialog;
 import com.prettygirl.app.utils.DialogToastUtils;
-import com.prettygirl.app.utils.Utils;
 import com.prettygirl.superstar.util.PreferenceUtils;
 import com.prettygirl.superstar.util.StorageUtils;
 import com.prettygirl.superstar.util.UMengKey;
@@ -48,9 +46,9 @@ public class MBaseActivity extends AdTitleBaseActivity {
             }
         });
 
-//        ComponentName componentName = new ComponentName("com.prettygirl.superstar",
-//                "com.prettygirl.superstar.SuperStarActivity");
-//        Utils.toggleAppIcon(this, componentName, true);
+        //        ComponentName componentName = new ComponentName("com.prettygirl.superstar",
+        //                "com.prettygirl.superstar.SuperStarActivity");
+        //        Utils.toggleAppIcon(this, componentName, true);
         if (PreferenceUtils.getBoolean(PreferenceUtils.KEY_NEED_REMOVE_CACHE, false)) {
             ImageLoader.getInstance().clearDiscCache();
             ImageLoader.getInstance().clearMemoryCache();
