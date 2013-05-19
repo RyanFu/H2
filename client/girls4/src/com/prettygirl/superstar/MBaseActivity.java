@@ -45,6 +45,11 @@ public class MBaseActivity extends AdTitleBaseActivity {
                 }
             }
         });
+        if (PreferenceUtils.getBoolean(PreferenceUtils.KEY_NEED_REMOVE_CACHE, false)) {
+            ImageLoader.getInstance().clearDiscCache();
+            ImageLoader.getInstance().clearMemoryCache();
+            PreferenceUtils.setBoolean(PreferenceUtils.KEY_NEED_REMOVE_CACHE, false);
+        }
     }
 
     private Handler mHandler = new Handler();

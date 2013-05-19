@@ -215,6 +215,7 @@ public class StorageUtils {
                         }
                         if (stars.size() > 0) {
                             PreferenceUtils.setString(PreferenceUtils.KEY_LATEST_GIRLS_PATH, pfile);
+                            PreferenceUtils.setBoolean(PreferenceUtils.KEY_NEED_REMOVE_CACHE, true);
                         }
                         bufferedReader.close();
                         inputStreamReader.close();
