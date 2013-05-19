@@ -8,6 +8,7 @@ from urllib import urlretrieve
 from bs4 import BeautifulSoup as bs
 from warnings import catch_warnings
 import time
+import base64
 import re
 
 url_format = "http://www.mm-girl.com/girl-star{0}{1}.html"
