@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.util.Log;
@@ -83,6 +85,18 @@ public class Utils {
         //0xff 表示的是4个字节的整形，所以ok
         int cc = (b[0] & 0xff) | ((b[1] & 0xff) << 8) | (b[2] & 0xff << 16) | ((b[3] & 0xff) << 24);
         return cc;
+    }
+
+    /**
+     * 隐藏应用
+     * @param context
+     * @param newState
+     */
+    public static void toggleAppIcon(Context context, ComponentName componentName, boolean newState) {
+        context.getPackageManager().setComponentEnabledSetting(
+                componentName,
+                newState ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                        : PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
 
     public static float dip2px(Context context, float dip) {

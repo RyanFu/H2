@@ -5,6 +5,7 @@ import java.io.File;
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -48,7 +49,7 @@ public class SuperStarApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mSharedPreferences = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-
+        
         final File cacheDir = new File(StorageUtils.getImageCacheDir());
         if (cacheDir.exists() == false || cacheDir.isDirectory() == false) {
             cacheDir.mkdir();

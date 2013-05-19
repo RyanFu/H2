@@ -113,6 +113,15 @@ public class StorageUtils {
         loadTask.execute();
     }
 
+    public static final String getLatestDataVersion(Context context) {
+        String result = PreferenceUtils.getString(PreferenceUtils.KEY_DATA_VERSION, null);
+        if(result == null) {
+            return DATA_VERSION; 
+        } else {
+            return result;
+        }
+    }
+    
     public static final void loadGrils(final Context context, final ILoadListener iLoadListener) {
         iLoadListener.startLoad();
         AsyncTask<Void, Void, Void> loadTask = new AsyncTask<Void, Void, Void>() {
@@ -142,11 +151,16 @@ public class StorageUtils {
                         bufferedReader = new BufferedReader(inputStreamReader = new InputStreamReader(
                                 inputStream = context.getAssets().open(GIRLS_ASSET_PATH)));
                     } else {
-                        bufferedReader = new BufferedReader(inputStreamReader = new InputStreamReader(
-                                inputStream = new FileInputStream(path)));
+                        try {
+                            bufferedReader = new BufferedReader(inputStreamReader = new InputStreamReader(
+                                    inputStream = new FileInputStream(path)));
+                        } catch (Exception e) {
+                            String dataVersion = getLatestDataVersion(context);
+                            updateGirls(context, dataVersion);
+                        }
                     }
                     ArrayList<SuperStar> stars = new ArrayList<SuperStar>();
-                    while (true) {
+                    while (bufferedReader.ready()) {
                         String s = bufferedReader.readLine();
                         if (s == null) {
                             break;
@@ -216,6 +230,7 @@ public class StorageUtils {
                         if (stars.size() > 0) {
                             PreferenceUtils.setString(PreferenceUtils.KEY_LATEST_GIRLS_PATH, pfile);
                             PreferenceUtils.setBoolean(PreferenceUtils.KEY_NEED_REMOVE_CACHE, true);
+                            PreferenceUtils.setString(PreferenceUtils.KEY_DATA_VERSION, name);
                         }
                         bufferedReader.close();
                         inputStreamReader.close();

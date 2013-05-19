@@ -48,6 +48,8 @@ public class SuperStarActivity extends MBaseActivity implements ILoadListener, O
         mGridView = (GridView) findViewById(R.id.av_gallery_grid_view);
         StorageUtils.loadGrils(this, this);
         mProgressView.setVisibility(View.VISIBLE);
+        findViewById(R.id.button1).setOnClickListener(this);
+        findViewById(R.id.button2).setOnClickListener(this);
         setTitle(R.string.app_name);
         setGoBackIconVisibility(View.GONE);
         setAdViewClickListener(this);
@@ -169,6 +171,7 @@ public class SuperStarActivity extends MBaseActivity implements ILoadListener, O
     public void startLoad() {
         mProgressView.setVisibility(View.VISIBLE);
         mGridView.setVisibility(View.GONE);
+        mFailedPanelView.setVisibility(View.GONE);
     }
 
     @SuppressWarnings("unchecked")
@@ -203,6 +206,11 @@ public class SuperStarActivity extends MBaseActivity implements ILoadListener, O
         if (vid == R.id.entry_point_ad_icon) {
             MobclickAgent.onEvent(this, UMengKey.ENTRY_POINT_ACTIVITY_AD);
             AdUtils.handleMoreAppEvent(this);
+        } else if (vid == R.id.button2) {
+            Intent intent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+            startActivity(intent);
+        } else if (vid == R.id.button1) {
+            StorageUtils.loadGrils(this, this);
         }
     }
 

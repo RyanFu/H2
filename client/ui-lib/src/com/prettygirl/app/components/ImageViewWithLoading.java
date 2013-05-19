@@ -1,7 +1,5 @@
 package com.prettygirl.app.components;
 
-import com.pretty.lib.R;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -13,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
+
+import com.pretty.lib.R;
 
 public class ImageViewWithLoading extends RelativeLayout {
 

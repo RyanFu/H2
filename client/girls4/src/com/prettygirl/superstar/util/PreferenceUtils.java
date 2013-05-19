@@ -11,6 +11,7 @@ public final class PreferenceUtils {
     public static final String KEY_LAST_SHOW_AD_DIALOG_DATA_CHANGED = "key_last_show_ad_dialog_data_changed";
     public static final String KEY_LATEST_GIRLS_PATH = "key_latest_girls_path";
     public static final String KEY_NEED_REMOVE_CACHE = "key_need_remove_cache";
+    public static final String KEY_DATA_VERSION = "key_data_version";
 
     private static SharedPreferences mSharedPreferences;
 

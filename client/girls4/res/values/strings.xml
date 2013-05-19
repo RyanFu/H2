@@ -20,6 +20,6 @@
     <string name="network_error_or_updating">出错了， 请检查你是否正在使用最新版本，网络是否连通。</string>
     <string name="navigation_rank_center_view_retry">重试</string>
     <string name="navigation_rank_center_view_setting">设置</string>
-    <string name="navigation_rank_center_view_failed">获取排行榜失败，\n请检查你的网络或者看看有没有最新版本之后,重试！</string>
+    <string name="navigation_rank_center_view_failed">数据获取失败，请检查你的网络\n或查看有没有最新版本之后,重试！</string>
 
 </resources>
