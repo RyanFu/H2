@@ -16,4 +16,6 @@
     <string name="share_title">分享</string>
     <string name="more">更多</string>
 
+    <string name="av_personal_info">个人简介</string>
+    <string name="av_personal_news">最新绯闻</string>
 </resources>

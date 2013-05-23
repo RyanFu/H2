@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.prettygirl.avgallery.components.ViewPagerTabButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tabs="http://schemas.android.com/apk/res/com.prettygirl.avgallery1"
+    android:id="@+id/av_detail_tab_text"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tabs:lineColor="#ff6F8FC7"
+    tabs:lineColorSelected="#FF6F8FC7" />

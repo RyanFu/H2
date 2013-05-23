@@ -21,4 +21,9 @@
         <item>slide_view</item>
     </string-array>
 
+    <string-array name="av_detail_tabs">
+        <item>@string/av_personal_info</item>
+        <item>@string/av_personal_news</item>
+    </string-array>
+    
 </resources>

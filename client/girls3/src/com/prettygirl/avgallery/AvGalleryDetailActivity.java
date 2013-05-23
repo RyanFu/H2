@@ -9,15 +9,21 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import com.prettygirl.app.base.AdTitleBaseActivity;
 import com.prettygirl.app.utils.AdUtils;
 import com.prettygirl.app.utils.DialogToastUtils;
 import com.prettygirl.app.utils.ServerUtils;
+import com.prettygirl.avgallery.components.FixedTabsView;
 import com.prettygirl.avgallery.components.ScrollerView;
+import com.prettygirl.avgallery.components.TabsAdapter;
+import com.prettygirl.avgallery.components.ViewPagerTabButton;
 import com.prettygirl.avgallery.model.AVGirl;
 import com.prettygirl.avgallery.util.UMengKey;
 import com.prettygirl.avgallery1.R;
@@ -26,12 +32,23 @@ import com.umeng.analytics.MobclickAgent;
 public class AvGalleryDetailActivity extends AdTitleBaseActivity implements OnClickListener {
 
     private AVGirl mGirl;
+    private FixedTabsView mFixedTabsView;
+    private ViewPager mViewPager;
+
+    private String[] tabs = null;
+
+    private View[] views = new View[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.av_gallery_detail_activity);
-        WebView view = (WebView) findViewById(R.id.main_container_web_view);
+        tabs = getResources().getStringArray(R.array.av_detail_tabs);
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mFixedTabsView = (FixedTabsView) findViewById(R.id.fixedTabsView);
+        mViewPager.setAdapter(mPageAdapter);
+        mFixedTabsView.setAdapter(mTabsAdapter);
+        mFixedTabsView.setViewPager(mViewPager);
         Intent intent = getIntent();
         Object o = intent.getParcelableExtra(AvGalleryMainActivity.EXT_KEY_GIRL);
         AVGirl girl = null;
@@ -41,9 +58,7 @@ public class AvGalleryDetailActivity extends AdTitleBaseActivity implements OnCl
         } else {
             girl = (AVGirl) o;
         }
-
         mGirl = girl;
-        view.loadUrl("file:///android_asset/langs/" + AvApplication.getCurrentLang() + "/" + mGirl.path);
         setGoBackIconVisibility(View.VISIBLE);
         setTitle(girl.name);
         setAdViewClickListener(this);
@@ -91,6 +106,58 @@ public class AvGalleryDetailActivity extends AdTitleBaseActivity implements OnCl
             AdUtils.handleMoreAppEvent(this);
         }
     }
+
+    TabsAdapter mTabsAdapter = new TabsAdapter() {
+
+        @Override
+        public View getView(int position) {
+            if (tabs == null) {
+                return null;
+            } else {
+                View result = View.inflate(getBaseContext(), R.layout.av_gallery_detail_tab, null);
+                ViewPagerTabButton text = (ViewPagerTabButton) result.findViewById(R.id.av_detail_tab_text);
+                text.setText(tabs[position]);
+                return result;
+            }
+        }
+        
+    };
+
+    PagerAdapter mPageAdapter = new PagerAdapter() {
+
+        @Override
+        public boolean isViewFromObject(View view, Object obj) {
+            return view == obj;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            super.destroyItem(container, position, object);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            int index = position % views.length;
+            if (views[index] == null) {
+                views[index] = new WebView(AvGalleryDetailActivity.this);
+            } else {
+                container.removeView(views[index]);
+            }
+            ((WebView) views[index]).loadUrl("file:///android_asset/langs/" + AvApplication.getCurrentLang() + "/"
+                    + mGirl.path);
+            ((ViewPager) container).addView(views[index], 0);
+            return views[index];
+        }
+
+        @Override
+        public int getCount() {
+            if (tabs == null) {
+                return 0;
+            } else {
+                return tabs.length;
+            }
+        }
+    };
 
     public final static String readUrl(String url) throws IOException {
         StringBuilder buf = new StringBuilder();
