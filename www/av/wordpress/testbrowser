@@ -1,0 +1,17 @@
+
+var casper = require('casper').create();
+testit('1');
+casper.run();
+
+function testit(id){
+    casper.start().thenOpen('http://localhost/wordpress/test.php', {
+        method: "post",
+        data: {
+          title: 'chuck'+id,
+          content: 'content'+id
+        }
+    }, function() {
+        this.echo("POST request has been sent.")
+    });
+    
+}
