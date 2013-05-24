@@ -95,13 +95,13 @@ public class AvGalleryMainActivity extends MBaseActivity {
 
         @Override
         public void onPageSelected(int pIndex) {
-            //            if ("news".equals(tabs[pIndex])) {
-            //                int index = pIndex % tabs.length;
-            //                views[index].findViewById(R.id.av_gallery_news).setVisibility(View.VISIBLE);
-            //                views[index].findViewById(R.id.av_gallery_grid_view).setVisibility(View.GONE);
-            //                WebView webView = ((WebView) views[index].findViewById(R.id.av_gallery_main_news));
-            //                webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
-            //            }
+            if ("news".equals(tabs[pIndex])) {
+                int index = pIndex % tabs.length;
+                views[index].findViewById(R.id.av_gallery_news).setVisibility(View.VISIBLE);
+                views[index].findViewById(R.id.av_gallery_grid_view).setVisibility(View.GONE);
+                WebView webView = ((WebView) views[index].findViewById(R.id.av_gallery_main_news));
+                webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
+            }
         }
 
     };
