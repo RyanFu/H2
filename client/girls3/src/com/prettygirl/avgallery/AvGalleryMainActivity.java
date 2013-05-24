@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebView;
@@ -94,13 +95,13 @@ public class AvGalleryMainActivity extends MBaseActivity {
 
         @Override
         public void onPageSelected(int pIndex) {
-            if ("news".equals(tabs[pIndex])) {
-                int index = pIndex % tabs.length;
-                views[index].findViewById(R.id.av_gallery_news).setVisibility(View.VISIBLE);
-                views[index].findViewById(R.id.av_gallery_grid_view).setVisibility(View.GONE);
-                WebView webView = ((WebView) views[index].findViewById(R.id.av_gallery_main_news));
-                webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
-            }
+            //            if ("news".equals(tabs[pIndex])) {
+            //                int index = pIndex % tabs.length;
+            //                views[index].findViewById(R.id.av_gallery_news).setVisibility(View.VISIBLE);
+            //                views[index].findViewById(R.id.av_gallery_grid_view).setVisibility(View.GONE);
+            //                WebView webView = ((WebView) views[index].findViewById(R.id.av_gallery_main_news));
+            //                webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
+            //            }
         }
 
     };
@@ -263,15 +264,55 @@ public class AvGalleryMainActivity extends MBaseActivity {
             } else if ("news".equals(tabs[position])) {
                 views[index].findViewById(R.id.av_gallery_news).setVisibility(View.VISIBLE);
                 views[index].findViewById(R.id.av_gallery_grid_view).setVisibility(View.GONE);
-                WebView webView = ((WebView) views[index].findViewById(R.id.av_gallery_main_news));
+                final View errView = views[index].findViewById(R.id.av_gallery_main_news_err);
+                final View mainView = views[index].findViewById(R.id.av_gallery_main_news_main);
+                final WebView webView = ((WebView) mainView.findViewById(R.id.av_gallery_main_news));
+                mainView.findViewById(R.id.av_gallery_main_news_back).setOnClickListener(new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        if (webView.canGoBack()) {
+                            webView.goBack();
+                        }
+                    }
+
+                });
+                errView.findViewById(R.id.button1).setOnClickListener(new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        errView.setVisibility(View.GONE);
+                        mainView.setVisibility(View.VISIBLE);
+                        webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
+                    }
+                });
+                errView.findViewById(R.id.button2).setOnClickListener(new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS);
+                        startActivity(intent);
+                    }
+                });
                 webView.getSettings().setSupportMultipleWindows(false);
+                webView.getSettings().setBlockNetworkImage(false);
+                // webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+                // webView.getSettings().setJavaScriptEnabled(false);
                 webView.setWebViewClient(new WebViewClient() {
+
+                    @Override
+                    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                        super.onReceivedError(view, errorCode, description, failingUrl);
+                        errView.setVisibility(View.VISIBLE);
+                        mainView.setVisibility(View.GONE);
+                    }
+
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
                         view.loadUrl(url);
                         return true;
                     }
                 });
-                // webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
+                webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
             }
             ((ViewPager) container).addView(views[index], 0);
             return views[index];

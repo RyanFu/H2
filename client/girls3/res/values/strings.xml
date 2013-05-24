@@ -17,5 +17,8 @@
     <string name="more">更多</string>
     <string name="av_personal_info">列表</string>
     <string name="av_personal_news">绯闻</string>
+    <string name="av_gallery_main_news_err_msg">内容获取失败！\n 请查看是否可升级新版或网络后重试！</string>
+    <string name="av_gallery_main_news_err_retry">重试</string>
+    <string name="av_gallery_main_news_err_setting">设置</string>
 
 </resources>
