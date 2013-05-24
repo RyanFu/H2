@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class AvGalleryMainActivity extends MBaseActivity {
         mViewPager.setAdapter(mPageAdapter);
         mFixedTabsView.setAdapter(mTabsAdapter);
         mFixedTabsView.setViewPager(mViewPager);
+        mViewPager.setOnPageChangeListener(mOnPageChangeListener);
 
         //        GridView mGridView = (GridView) findViewById(R.id.av_gallery_grid_view);
         //        //        mGridView.setFastScrollEnabled(true);
@@ -78,6 +80,31 @@ public class AvGalleryMainActivity extends MBaseActivity {
         //        });
     }
 
+    OnPageChangeListener mOnPageChangeListener = new OnPageChangeListener() {
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+            // NG
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+            // NG
+        }
+
+        @Override
+        public void onPageSelected(int pIndex) {
+            if ("news".equals(tabs[pIndex])) {
+                int index = pIndex % tabs.length;
+                views[index].findViewById(R.id.av_gallery_news).setVisibility(View.VISIBLE);
+                views[index].findViewById(R.id.av_gallery_grid_view).setVisibility(View.GONE);
+                WebView webView = ((WebView) views[index].findViewById(R.id.av_gallery_main_news));
+                webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
+            }
+        }
+
+    };
+
     @Override
     public void onResume() {
         super.onResume();
@@ -88,8 +115,13 @@ public class AvGalleryMainActivity extends MBaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         boolean result = super.onKeyDown(keyCode, event);
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            ExitDialog d = new ExitDialog(this);
-            d.show();
+            if (mViewPager.getCurrentItem() != 0) {
+                mViewPager.setCurrentItem(0);
+                return false;
+            } else {
+                ExitDialog d = new ExitDialog(this);
+                d.show();
+            }
         }
         return result;
     }
@@ -233,13 +265,13 @@ public class AvGalleryMainActivity extends MBaseActivity {
                 views[index].findViewById(R.id.av_gallery_grid_view).setVisibility(View.GONE);
                 WebView webView = ((WebView) views[index].findViewById(R.id.av_gallery_main_news));
                 webView.getSettings().setSupportMultipleWindows(false);
-                webView.setWebViewClient(new WebViewClient(){
+                webView.setWebViewClient(new WebViewClient() {
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
                         view.loadUrl(url);
                         return true;
                     }
                 });
-                webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
+                // webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
             }
             ((ViewPager) container).addView(views[index], 0);
             return views[index];
