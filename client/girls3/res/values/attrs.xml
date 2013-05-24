@@ -13,6 +13,11 @@
         <attr name="dividerMarginTop" format="dimension" />
         <attr name="dividerMarginBottom" format="dimension" />
         <attr name="dividerDrawable" format="reference" />
+        <attr name="dividerVisibility">
+            <enum name="visible" value="0x0" />
+            <enum name="invisible" value="0x4" />
+            <enum name="gone" value="0x8" />
+        </attr>
         <attr name="outsideOffset" format="dimension" />
     </declare-styleable>
     

@@ -20,6 +20,9 @@
     <com.prettygirl.avgallery.components.FixedTabsView
         android:id="@+id/fixedTabsView"
         android:layout_width="wrap_content"
-        android:layout_height="35dip" />
+        android:layout_height="35dip"
+        tabs:dividerMarginBottom="3dip"
+        tabs:dividerMarginTop="3dip"
+        tabs:dividerVisibility="invisible" />
 
 </LinearLayout>

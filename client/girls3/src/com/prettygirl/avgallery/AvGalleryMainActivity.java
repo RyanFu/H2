@@ -11,6 +11,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -20,6 +22,7 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.prettygirl.app.utils.ServerUtils;
 import com.prettygirl.avgallery.components.FixedTabsView;
 import com.prettygirl.avgallery.components.TabsAdapter;
 import com.prettygirl.avgallery.components.ViewPagerTabButton;
@@ -49,7 +52,7 @@ public class AvGalleryMainActivity extends MBaseActivity {
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.av_gallery_main_activity);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.av_gallery_main_cust_title_with_tab);
-        
+
         mLang = AvApplication.getCurrentLang();
         mGirls = ((AvApplication) getApplicationContext()).getGirlList(mLang);
 
@@ -205,7 +208,8 @@ public class AvGalleryMainActivity extends MBaseActivity {
                 views = new View[tabs.length];
             }
             if (views[index] == null) {
-                views[index] = View.inflate(AvGalleryMainActivity.this, R.layout.av_gallery_main_activity_tabs_content, null);
+                views[index] = View.inflate(AvGalleryMainActivity.this, R.layout.av_gallery_main_activity_tabs_content,
+                        null);
             } else {
                 container.removeView(views[index]);
             }
@@ -227,8 +231,15 @@ public class AvGalleryMainActivity extends MBaseActivity {
             } else if ("news".equals(tabs[position])) {
                 views[index].findViewById(R.id.av_gallery_news).setVisibility(View.VISIBLE);
                 views[index].findViewById(R.id.av_gallery_grid_view).setVisibility(View.GONE);
-                //                ((WebView) views[index].findViewById(R.id.av_gallery_main_news)).loadUrl(ServerUtils
-                //                        .getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
+                WebView webView = ((WebView) views[index].findViewById(R.id.av_gallery_main_news));
+                webView.getSettings().setSupportMultipleWindows(false);
+                webView.setWebViewClient(new WebViewClient(){
+                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                        view.loadUrl(url);
+                        return true;
+                    }
+                });
+                webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
             }
             ((ViewPager) container).addView(views[index], 0);
             return views[index];

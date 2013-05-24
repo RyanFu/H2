@@ -47,6 +47,8 @@ public class FixedTabsView extends LinearLayout implements ViewPager.OnPageChang
     private int mDividerMarginTop = 12;
     private int mDividerMarginBottom = 21;
 
+    private int mDividerVisibility;
+
     public FixedTabsView(Context context) {
         this(context, null);
     }
@@ -69,6 +71,8 @@ public class FixedTabsView extends LinearLayout implements ViewPager.OnPageChang
         mDividerMarginBottom = a.getDimensionPixelSize(R.styleable.ViewPagerExtensions_dividerMarginBottom,
                 mDividerMarginBottom);
 
+        mDividerVisibility = a.getInt(R.styleable.ViewPagerExtensions_dividerVisibility, View.VISIBLE);
+        
         mDividerDrawable = a.getDrawable(R.styleable.ViewPagerExtensions_dividerDrawable);
 
         a.recycle();
@@ -171,7 +175,7 @@ public class FixedTabsView extends LinearLayout implements ViewPager.OnPageChang
             v.setBackgroundDrawable(mDividerDrawable);
         else
             v.setBackgroundColor(mDividerColor);
-
+        v.setVisibility(mDividerVisibility);
         return v;
     }
 
