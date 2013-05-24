@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
@@ -265,6 +266,7 @@ public class AvGalleryMainActivity extends MBaseActivity {
                 views[index].findViewById(R.id.av_gallery_news).setVisibility(View.VISIBLE);
                 views[index].findViewById(R.id.av_gallery_grid_view).setVisibility(View.GONE);
                 final View errView = views[index].findViewById(R.id.av_gallery_main_news_err);
+                final View loadingView = views[index].findViewById(R.id.loadingPanel);
                 final View mainView = views[index].findViewById(R.id.av_gallery_main_news_main);
                 final WebView webView = ((WebView) mainView.findViewById(R.id.av_gallery_main_news));
                 mainView.findViewById(R.id.av_gallery_main_news_back).setOnClickListener(new OnClickListener() {
@@ -282,7 +284,8 @@ public class AvGalleryMainActivity extends MBaseActivity {
                     @Override
                     public void onClick(View v) {
                         errView.setVisibility(View.GONE);
-                        mainView.setVisibility(View.VISIBLE);
+                        mainView.setVisibility(View.GONE);
+                        loadingView.setVisibility(View.VISIBLE);
                         webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
                     }
                 });
@@ -298,6 +301,18 @@ public class AvGalleryMainActivity extends MBaseActivity {
                 webView.getSettings().setBlockNetworkImage(false);
                 // webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
                 // webView.getSettings().setJavaScriptEnabled(false);
+                webView.setWebChromeClient(new WebChromeClient() {
+
+                    @Override
+                    public void onProgressChanged(WebView view, int newProgress) {
+                        super.onProgressChanged(view, newProgress);
+                        if (newProgress >= 100) {
+                            mainView.setVisibility(View.VISIBLE);
+                            loadingView.setVisibility(View.GONE);
+                        }
+                    }
+
+                });
                 webView.setWebViewClient(new WebViewClient() {
 
                     @Override
@@ -305,6 +320,7 @@ public class AvGalleryMainActivity extends MBaseActivity {
                         super.onReceivedError(view, errorCode, description, failingUrl);
                         errView.setVisibility(View.VISIBLE);
                         mainView.setVisibility(View.GONE);
+                        loadingView.setVisibility(View.GONE);
                     }
 
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
