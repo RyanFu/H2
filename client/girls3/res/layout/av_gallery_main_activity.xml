@@ -1,17 +1,26 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <GridView
-        android:id="@+id/av_gallery_grid_view"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffefefef"
-        android:gravity="center"
-        android:listSelector="#00ffffff"
-        android:numColumns="2"
-        android:padding="0dip"
-        android:stretchMode="columnWidth" />
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+    </android.support.v4.view.ViewPager>
 
-</RelativeLayout>
+    <!-- <GridView -->
+    <!-- android:id="@+id/av_gallery_grid_view" -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="match_parent" -->
+    <!-- android:background="#ffefefef" -->
+    <!-- android:gravity="center" -->
+    <!-- android:listSelector="#00ffffff" -->
+    <!-- android:numColumns="2" -->
+    <!-- android:padding="0dip" -->
+    <!-- android:stretchMode="columnWidth" -->
+    <!-- android:visibility="gone" /> -->
+
+</LinearLayout>
