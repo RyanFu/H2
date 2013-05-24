@@ -285,9 +285,9 @@ public class AvGalleryMainActivity extends MBaseActivity {
                     @Override
                     public void onClick(View v) {
                         errView.setVisibility(View.GONE);
-                        mainView.setVisibility(View.GONE);
                         loadingView.setVisibility(View.VISIBLE);
-                        webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
+                        webView.reload();
+                        // webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
                     }
                 });
                 errView.findViewById(R.id.button2).setOnClickListener(new OnClickListener() {
@@ -323,21 +323,23 @@ public class AvGalleryMainActivity extends MBaseActivity {
                         } else {
                             mainView.findViewById(R.id.av_gallery_main_news_back).setVisibility(View.GONE);
                         }
+                        loadingView.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                         super.onReceivedError(view, errorCode, description, failingUrl);
                         errView.setVisibility(View.VISIBLE);
-                        mainView.setVisibility(View.GONE);
-                        loadingView.setVisibility(View.GONE);
                     }
 
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                        errView.setVisibility(View.GONE);
+                        loadingView.setVisibility(View.VISIBLE);
                         view.loadUrl(url);
                         return true;
                     }
                 });
+                errView.setVisibility(View.GONE);
                 loadingView.setVisibility(View.VISIBLE);
                 webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
             }

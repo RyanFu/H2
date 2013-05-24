@@ -2,6 +2,8 @@
 
     <drawable name="av_gallery_main_grid_item_normal">#00ffffff</drawable>
     <drawable name="av_gallery_main_grid_item_pressed">#55619537</drawable>
+
     <color name="av_detail_tab_selected">#5500ff00</color>
+    <color name="white">#ffffff</color>
 
 </resources>
