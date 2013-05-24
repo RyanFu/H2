@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -48,6 +49,8 @@ public class FixedTabsView extends LinearLayout implements ViewPager.OnPageChang
     private int mDividerMarginBottom = 21;
 
     private int mDividerVisibility;
+
+    private OnPageChangeListener mOnPageChangeListener;
 
     public FixedTabsView(Context context) {
         this(context, null);
@@ -107,6 +110,10 @@ public class FixedTabsView extends LinearLayout implements ViewPager.OnPageChang
             initTabs();
     }
 
+    public void setOnPageChangeListener(OnPageChangeListener cOnPageChangeListener){
+        mOnPageChangeListener = cOnPageChangeListener;
+    }
+    
     /**
      * Initialize and add all tabs to the layout
      */
@@ -147,14 +154,17 @@ public class FixedTabsView extends LinearLayout implements ViewPager.OnPageChang
 
     @Override
     public void onPageScrollStateChanged(int state) {
+        mOnPageChangeListener.onPageScrollStateChanged(state);
     }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        mOnPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
     }
 
     @Override
     public void onPageSelected(int position) {
+        mOnPageChangeListener.onPageSelected(position);
         selectTab(position);
     }
 

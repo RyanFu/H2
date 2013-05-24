@@ -65,7 +65,7 @@ public class AvGalleryMainActivity extends MBaseActivity {
         mViewPager.setAdapter(mPageAdapter);
         mFixedTabsView.setAdapter(mTabsAdapter);
         mFixedTabsView.setViewPager(mViewPager);
-        mViewPager.setOnPageChangeListener(mOnPageChangeListener);
+        mFixedTabsView.setOnPageChangeListener(mOnPageChangeListener);
 
         //        GridView mGridView = (GridView) findViewById(R.id.av_gallery_grid_view);
         //        //        mGridView.setFastScrollEnabled(true);
@@ -328,6 +328,7 @@ public class AvGalleryMainActivity extends MBaseActivity {
                         return true;
                     }
                 });
+                loadingView.setVisibility(View.VISIBLE);
                 webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
             }
             ((ViewPager) container).addView(views[index], 0);
