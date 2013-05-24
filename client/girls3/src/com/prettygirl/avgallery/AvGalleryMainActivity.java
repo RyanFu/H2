@@ -96,13 +96,13 @@ public class AvGalleryMainActivity extends MBaseActivity {
 
         @Override
         public void onPageSelected(int pIndex) {
-            if ("news".equals(tabs[pIndex])) {
-                int index = pIndex % tabs.length;
-                views[index].findViewById(R.id.av_gallery_news).setVisibility(View.VISIBLE);
-                views[index].findViewById(R.id.av_gallery_grid_view).setVisibility(View.GONE);
-                WebView webView = ((WebView) views[index].findViewById(R.id.av_gallery_main_news));
-                webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
-            }
+//            if ("news".equals(tabs[pIndex])) {
+//                int index = pIndex % tabs.length;
+//                views[index].findViewById(R.id.av_gallery_news).setVisibility(View.VISIBLE);
+//                views[index].findViewById(R.id.av_gallery_grid_view).setVisibility(View.GONE);
+//                WebView webView = ((WebView) views[index].findViewById(R.id.av_gallery_main_news));
+//                webView.loadUrl(ServerUtils.getPicServerRoot(AvGalleryMainActivity.this) + "/jp/wordpress");
+//            }
         }
 
     };
@@ -269,6 +269,7 @@ public class AvGalleryMainActivity extends MBaseActivity {
                 final View loadingView = views[index].findViewById(R.id.loadingPanel);
                 final View mainView = views[index].findViewById(R.id.av_gallery_main_news_main);
                 final WebView webView = ((WebView) mainView.findViewById(R.id.av_gallery_main_news));
+                mainView.findViewById(R.id.av_gallery_main_news_back).setVisibility(View.GONE);
                 mainView.findViewById(R.id.av_gallery_main_news_back).setOnClickListener(new OnClickListener() {
 
                     @Override
@@ -314,6 +315,15 @@ public class AvGalleryMainActivity extends MBaseActivity {
 
                 });
                 webView.setWebViewClient(new WebViewClient() {
+
+                    @Override
+                    public void onPageFinished(WebView view, String url) {
+                        if(webView.canGoBack()) {
+                            mainView.findViewById(R.id.av_gallery_main_news_back).setVisibility(View.VISIBLE);
+                        } else {
+                            mainView.findViewById(R.id.av_gallery_main_news_back).setVisibility(View.GONE);
+                        }
+                    }
 
                     @Override
                     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
