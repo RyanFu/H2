@@ -20,7 +20,6 @@ import com.prettygirl.app.base.AdTitleBaseActivity;
 import com.prettygirl.app.utils.AdUtils;
 import com.prettygirl.app.utils.DialogToastUtils;
 import com.prettygirl.app.utils.ServerUtils;
-import com.prettygirl.avgallery.components.FixedTabsView;
 import com.prettygirl.avgallery.components.ScrollerView;
 import com.prettygirl.avgallery.components.TabsAdapter;
 import com.prettygirl.avgallery.components.ViewPagerTabButton;
@@ -32,8 +31,8 @@ import com.umeng.analytics.MobclickAgent;
 public class AvGalleryDetailActivity extends AdTitleBaseActivity implements OnClickListener {
 
     private AVGirl mGirl;
-    private FixedTabsView mFixedTabsView;
-    private ViewPager mViewPager;
+//    private FixedTabsView mFixedTabsView;
+//    private ViewPager mViewPager;
 
     private String[] tabs = null;
 
@@ -43,12 +42,15 @@ public class AvGalleryDetailActivity extends AdTitleBaseActivity implements OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.av_gallery_detail_activity);
-        tabs = getResources().getStringArray(R.array.av_detail_tabs);
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mFixedTabsView = (FixedTabsView) findViewById(R.id.fixedTabsView);
-        mViewPager.setAdapter(mPageAdapter);
-        mFixedTabsView.setAdapter(mTabsAdapter);
-        mFixedTabsView.setViewPager(mViewPager);
+        
+        WebView mainContent = (WebView) findViewById(R.id.av_gallery_detail_main);
+        
+//        tabs = getResources().getStringArray(R.array.av_detail_tabs);
+//        mViewPager = (ViewPager) findViewById(R.id.pager);
+//        mFixedTabsView = (FixedTabsView) findViewById(R.id.fixedTabsView);
+//        mViewPager.setAdapter(mPageAdapter);
+//        mFixedTabsView.setAdapter(mTabsAdapter);
+//        mFixedTabsView.setViewPager(mViewPager);
         Intent intent = getIntent();
         Object o = intent.getParcelableExtra(AvGalleryMainActivity.EXT_KEY_GIRL);
         AVGirl girl = null;
@@ -59,6 +61,10 @@ public class AvGalleryDetailActivity extends AdTitleBaseActivity implements OnCl
             girl = (AVGirl) o;
         }
         mGirl = girl;
+        
+        mainContent.loadUrl("file:///android_asset/langs/" + AvApplication.getCurrentLang() + "/"
+                    + mGirl.path);
+        
         setGoBackIconVisibility(View.VISIBLE);
         setTitle(girl.name);
         setAdViewClickListener(this);

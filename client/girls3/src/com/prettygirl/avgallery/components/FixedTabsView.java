@@ -39,8 +39,6 @@ public class FixedTabsView extends LinearLayout implements ViewPager.OnPageChang
 
     private TabsAdapter mAdapter;
 
-    private TabsChangedListener mTabsChangedListener;
-    
     private ArrayList<View> mTabs = new ArrayList<View>();
 
     private Drawable mDividerDrawable;
